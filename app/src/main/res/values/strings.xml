@@ -1,0 +1,6 @@
+<resources>
+<!--    <string name="app_name">Kotlin</string>-->
+    <!--密码字符过滤-->
+    <string name="pass_word_filter" translatable="false">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+
+</resources>
