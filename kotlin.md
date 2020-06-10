@@ -4,6 +4,65 @@
 
 - 嗯哼
 
-- honestly
-- bare
--
+- honestly - 真诚地，公正地
+- bare - adj.赤裸的， vt.露出
+- credential - 证书
+- template - 模版
+- grab - 攫取
+- grabbed - 攫取过去式
+- whipped - 鞭打，搅拌
+- nuts - 狂热的，热衷的
+- jimmy - 撬棍，巧克力棒
+- vanilla - 香草味的
+- scary - 害怕的
+- machine - 机器
+- valuable - 有价值的，昂贵的
+- dentist - 牙医
+- idiot - 笨蛋白痴
+- screwed - 螺丝
+- stereo - 立体声
+- favorite - 最喜欢的
+- whatsoever - 不管怎样
+- bunch - 串
+- bracket - n.支架 ，vt.归为同类
+- hang out - 挂出，闲逛
+- gonna  = going to
+- actually - 事实上
+- furniture  -家具
+- lizard - 蜥蜴
+- head for - 前往
+- honeymoon - 蜜月
+- horrible - 讨厌的
+- independence - 独立的
+- mittens - 手套
+- sleigh - 雪橇
+- kittens - 猫咪
+- whiskers - 胡须
+- decision - 决定
+- established -v.建立，决定 adj.确定的
+- metaphor - 比喻
+- issue - 问题
+- purse - 女士手包
+- pants - 内裤
+- drift- 漂
+- familiar 属性的
+- freaked out - 惊吓
+- gorgeous - 华丽的
+- presents - 礼物
+- wet - 潮湿
+- naked - 赤裸
+- hormone - 荷尔蒙
+- strip - v.剥去，除去,n.条状，脱衣舞
+- lesbian - 女同性恋
+- aura - 元气
+- stuff - v.填充 ,n.东西，材料
+- intestine - 肠子
+- throat - 嗓子
+- weird - 奇怪，怪异
+- promoted - v.晋级,促进
+- muse - n. vt. 沉思
+- hump - 驼背，驼峰
+- gotta == have to do
+- viscera - 内脏
+- sudden - 突然
+- tongue - 舌头，语言
