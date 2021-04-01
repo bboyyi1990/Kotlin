@@ -14,8 +14,10 @@ import com.yi.kotlin.base.Router
 import com.yi.kotlin.data.BannerData
 import com.yi.kotlin.data.MainData
 import com.yi.kotlin.http.action.BannerAction
+import com.yi.kotlin.http.action.TestAction
 import com.yi.kotlin.http.base.ApiCallback
 import com.yi.kotlin.uitl.Logger
+import com.yi.kotlin.uitl.Main
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -73,7 +75,9 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private var clickListener = View.OnClickListener { v ->
+    private var clickListener = View.OnClickListener { view ->
+        TestAction().enqueue(object : ApiCallback<MainData>() {})
         BannerAction().enqueue(object : ApiCallback<BannerData>() {})
+        BannerAction().enqueue(null)
     }
 }

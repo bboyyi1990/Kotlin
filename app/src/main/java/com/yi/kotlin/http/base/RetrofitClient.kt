@@ -38,9 +38,8 @@ object RetrofitClient {
                         TAG,
                         message
                     )
-                }).setLevel(
-                    HttpLoggingInterceptor.Level.BODY
-                )
-            ).build()
+                }).setLevel(HttpLoggingInterceptor.Level.BODY)
+            )
+            .build()
     }
 }

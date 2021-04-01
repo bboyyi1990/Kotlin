@@ -57,7 +57,7 @@ class BaseApplication : Application() {
     }
 
     private fun initCrashHandler() {
-        if (!BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             return
         }
         //运行异常捕获的使用

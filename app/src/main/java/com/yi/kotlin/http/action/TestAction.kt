@@ -9,10 +9,11 @@ import io.reactivex.Observable
  * @author Yi
  * @date 2020/5/9
  */
-open class TestAction : BaseAction<MainData>() {
+class TestAction : BaseAction<MainData>() {
     override fun getRequest(): Observable<MainData> {
-        val headers = mutableMapOf<String, String>("New" to "1")
+        val headers = mutableMapOf<String, Any>("New" to "1", "TEST" to "2")
         var request = getApi().login("kotlin/login", "thisIsToken", headers, getRequestMap())
+//        var request = getApi().addLikeRequest("1", "1", "1", "1", mutableMapOf())
         return request
     }
 }

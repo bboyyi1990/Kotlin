@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
  */
 open abstract class BaseAction<T : BaseData> {
 
-    protected fun getRequestMap(): Map<String, Any> {
+    protected fun getRequestMap(): MutableMap<String, Any> {
         var params = hashMapOf<String, Any>("common" to 1)
         //add common params
         params["value"] = "1"

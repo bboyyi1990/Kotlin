@@ -36,8 +36,8 @@ interface ApiService {
     fun login(
         @Path(value = "path", encoded = true) path: String,
         @Header(AUTHORIZATION) token: String,
-        @HeaderMap headerMap: Map<String, String>,
-        @Body body: Map<String, Any?>
+        @HeaderMap headers: MutableMap<String, Any>,
+        @Body body: MutableMap<String, Any>
     ): Observable<MainData>
 
     @HTTP(
@@ -50,6 +50,6 @@ interface ApiService {
         @Path("actionId") actionId: String,
         @Path("tenantId") tenantId: String,
         @Path("userId") userId: String,
-        @Body body: Map<String, Any?>
-    ): Call<BaseData>
+        @Body body: MutableMap<String, Any?>
+    ): Observable<MainData>
 }
