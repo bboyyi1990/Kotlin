@@ -31,7 +31,9 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name="com.yi.kotlin.welcome.WelcomeActivity">
+        <activity
+            android:name="com.yi.kotlin.welcome.WelcomeActivity"
+            android:screenOrientation="locked">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -40,7 +42,8 @@
 
         <activity
             android:name="com.yi.kotlin.main.MainActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="behind" />
 
     </application>
 

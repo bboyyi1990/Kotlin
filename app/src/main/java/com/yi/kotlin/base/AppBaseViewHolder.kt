@@ -7,7 +7,7 @@ import com.chad.library.adapter.base.BaseViewHolder
  * @author Yi
  * @date 2020/4/16
  */
-abstract class AppBaseViewHolder<T>(view: View?) : BaseViewHolder(view) {
+abstract class AppBaseViewHolder<T>(view: View) : BaseViewHolder(view) {
 
     open abstract fun setData(data: T)
 

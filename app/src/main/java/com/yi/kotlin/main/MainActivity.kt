@@ -4,13 +4,17 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.OnKeyboardListener
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.yi.kotlin.R
 import com.yi.kotlin.base.BaseActivity
 import com.yi.kotlin.base.Router
+import com.yi.kotlin.data.BannerData
 import com.yi.kotlin.data.MainData
+import com.yi.kotlin.http.action.BannerAction
+import com.yi.kotlin.http.base.ApiCallback
 import com.yi.kotlin.uitl.Logger
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -38,9 +42,13 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate() {
         initBar(false, keyboardListener)
+        title_tv.setOnClickListener(clickListener)
         refresh_layout.setOnRefreshLoadMoreListener(refreshListener)
         recycler_main.layoutManager = LinearLayoutManager(this)
         recycler_main.adapter = adapter
+
+        adapter.setOnItemChildClickListener { adapter, view, position -> }
+
     }
 
     private var keyboardListener = OnKeyboardListener { isPopup, keyboardHeight ->
@@ -66,7 +74,6 @@ class MainActivity : BaseActivity() {
     }
 
     private var clickListener = View.OnClickListener { v ->
-        when (v.id) {
-        }
+        BannerAction().enqueue(object : ApiCallback<BannerData>() {})
     }
 }

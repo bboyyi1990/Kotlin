@@ -40,12 +40,15 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'API_SERVICE', '\"http://www.mxnzp.com/api/\"'
+            buildConfigField 'String', 'TEST_SERVICE', '\"https://www.baidu.com/\"'
             signingConfig signingConfigs.config
         }
 
         debug {
+            debuggable true
             minifyEnabled false
             buildConfigField 'String', 'API_SERVICE', '\"http://www.mxnzp.com/api/\"'
+            buildConfigField 'String', 'TEST_SERVICE', '\"https://www.baidu.com/\"'
             signingConfig signingConfigs.config
         }
     }
