@@ -28,3 +28,37 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
+/**
+ * 统一各model构建版本
+ * 子模块内部不再声明版本信息
+ */
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty("android")) {
+            android {
+                compileSdkVersion 30
+                buildToolsVersion '30.0.3'
+                defaultConfig {
+                    targetSdkVersion 30
+                    minSdkVersion 24
+                    versionCode 1
+                    versionName "1.0"
+                    flavorDimensions "default"
+                }
+            }
+        }
+    }
+}
+
+ext {
+    supportLibraryVersion = "29.0.0"
+    var = [
+//            SupportV4            : "com.android.support:support-v4:$supportLibraryVersion",
+//            SupportV7            : "com.android.support:appcompat-v7:$supportLibraryVersion",
+//            SupportRecyclerviewV7: "com.android.support:recyclerview-v7:$supportLibraryVersion",
+//            SupportDesign        : "com.android.support:design:$supportLibraryVersion",
+//            SupportCardView      : "com.android.support:cardview-v7:$supportLibraryVersion"
+    ]
+}

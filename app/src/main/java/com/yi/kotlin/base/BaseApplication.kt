@@ -1,23 +1,20 @@
 package com.yi.kotlin.base
 
-import android.app.Application
 import android.graphics.Color
 import com.alibaba.android.arouter.launcher.ARouter
-import com.yi.kotlin.BuildConfig
-import com.yi.kotlin.R
-import com.yi.kotlin.uitl.ExceptionHandler
-import com.yi.kotlin.uitl.Logger
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
-import com.tencent.mmkv.MMKV
+import com.yi.common.BuildConfig
+import com.yi.common.base.AbstractApplication
+import com.yi.kotlin.R
 
 /**
  * @author Yi
  * @date 2020/4/2
  */
 
-class BaseApplication : Application() {
+class BaseApplication : AbstractApplication() {
     companion object {
         val TAG = BaseApplication::class.java.simpleName
 
@@ -26,6 +23,15 @@ class BaseApplication : Application() {
         fun getInstance(): BaseApplication {
             return application
         }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog()
+            ARouter.openDebug()
+        }
+        ARouter.init(this)
     }
 
     init {
@@ -42,31 +48,5 @@ class BaseApplication : Application() {
                 .setAccentColorId(R.color.colorAccent)
                 .setPrimaryColor(Color.WHITE)
         }
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-        application = this
-        ARouter.init(this);
-        if(BuildConfig.DEBUG){
-            ARouter.openLog()
-            ARouter.openDebug()
-        }
-        MMKV.initialize(this)
-        initCrashHandler()
-    }
-
-    private fun initCrashHandler() {
-        if (BuildConfig.DEBUG) {
-            return
-        }
-        //运行异常捕获的使用
-        ExceptionHandler.install(object : ExceptionHandler.CustomExceptionHandler {
-            override fun handlerException(thread: Thread, throwable: Throwable) {
-                if (throwable != null) {
-                    Logger.e(TAG, "Exception ===${throwable.message}")
-                }
-            }
-        })
     }
 }

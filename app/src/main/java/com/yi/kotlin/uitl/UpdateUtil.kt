@@ -10,6 +10,7 @@ import com.liulishuo.okdownload.core.cause.EndCause
 import com.liulishuo.okdownload.core.cause.ResumeFailedCause
 import com.liulishuo.okdownload.core.listener.DownloadListener1
 import com.liulishuo.okdownload.core.listener.assist.Listener1Assist
+import com.yi.common.util.FileUtil
 import com.yi.kotlin.BuildConfig
 import com.yi.kotlin.base.BaseApplication
 import java.io.File

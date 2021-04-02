@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gyf.immersionbar.OnKeyboardListener
 import com.gyf.immersionbar.ktx.immersionBar
-import com.yi.kotlin.uitl.Logger
+import com.yi.common.base.ActivityManager
+import com.yi.common.util.Logger
 
 /**
  * @author Yi
@@ -38,7 +39,7 @@ open abstract class BaseActivity : AppCompatActivity() {
      * listener = 软键盘操作回调，监听键盘状态以及高度
      */
     open fun initBar(fits: Boolean = true) = this.initBar(fits, null)
-    open fun initBar(fits: Boolean = true, keyboardListener: OnKeyboardListener? = null) =
+    protected fun initBar(fits: Boolean = true, keyboardListener: OnKeyboardListener? = null) =
         immersionBar {
             statusBarDarkFont(true, 0.2f)
             fitsSystemWindows(fits)

@@ -1,6 +1,9 @@
 package com.yi.kotlin.welcome
 
 import android.content.Intent
+import android.os.Bundle
+import android.view.Window
+import android.view.WindowManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.yi.kotlin.R
 import com.yi.kotlin.base.BaseActivity
@@ -26,8 +29,6 @@ class WelcomeActivity : BaseActivity() {
     override fun getLayout(): Int = R.layout.activity_welcome
 
     override fun onCreate() {
-//        tv_route_main.setOnClickListener { Router.route(MainActivity::class.java) }
-//        window.setBackgroundDrawableResource(R.color.colorPrimary)
         Observable.timer(1500, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
@@ -38,11 +39,4 @@ class WelcomeActivity : BaseActivity() {
                 Router.route(MainActivity::class.java, params)
             }
     }
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-
-    }
-
-    override fun initBar(fits: Boolean) = super.initBar(false)
 }
