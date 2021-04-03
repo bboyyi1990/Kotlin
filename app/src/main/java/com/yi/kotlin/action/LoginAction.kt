@@ -1,8 +1,8 @@
 package com.yi.kotlin.action
 
-import com.yi.kotlin.action.base.ApiCallback
+import com.yi.kotlin.action.api.ApiCallback
 import com.yi.common.http.BaseResponse
-import com.yi.kotlin.action.base.BaseAction
+import com.yi.kotlin.action.api.ApiAction
 import com.yi.kotlin.data.LoginData
 import io.reactivex.Observable
 
@@ -10,7 +10,7 @@ import io.reactivex.Observable
  * create by Yi on 2021/4/2
  *
  */
-class LoginAction() : BaseAction<LoginData>() {
+class LoginAction() : ApiAction<LoginData>() {
 
     constructor(number: String, password: String, callback: ApiCallback<LoginData>?) : this() {
         val params = mutableMapOf<String, Any>()
@@ -24,8 +24,8 @@ class LoginAction() : BaseAction<LoginData>() {
 
     override fun getApiObservable(
         headers: MutableMap<String, Any>,
-        body: MutableMap<String, Any>
+        params: MutableMap<String, Any>
     ): Observable<BaseResponse<LoginData>> {
-        return getApi().login("", "111", headers, body)
+        return getApi().userPOST("",headers,params)
     }
 }

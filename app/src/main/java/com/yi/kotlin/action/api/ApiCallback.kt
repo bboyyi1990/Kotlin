@@ -1,13 +1,14 @@
-package com.yi.kotlin.action.base
+package com.yi.kotlin.action.api
 
 import com.yi.common.http.BaseResponse
-import com.yi.kotlin.http.base.BaseCallback
+import com.yi.common.http.BaseCallback
+import com.yi.common.http.BaseData
 
 /**
  * @author Yi
  * @date 2020/5/11
  */
-open class ApiCallback<T> : BaseCallback<T>() {
+open class ApiCallback<T:BaseData> : BaseCallback<T>() {
 
     /**
      *  TODO dispose common business
@@ -21,7 +22,9 @@ open class ApiCallback<T> : BaseCallback<T>() {
         }
     }
 
-    override fun requestComplete() {
-        super.requestComplete()
+
+    override fun onError(e: Throwable) {
+        super.onError(e)
+
     }
 }

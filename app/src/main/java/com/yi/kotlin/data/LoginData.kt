@@ -1,6 +1,6 @@
 package com.yi.kotlin.data
 
-import com.yi.kotlin.base.BaseData
+import com.yi.common.http.BaseData
 
 /**
  * create by Yi on 2021/4/2

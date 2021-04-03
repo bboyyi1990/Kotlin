@@ -6,7 +6,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.yi.common.BuildConfig
-import com.yi.common.base.AbstractApplication
+import com.yi.common.base.BaseApplication
 import com.yi.kotlin.R
 
 /**
@@ -14,7 +14,7 @@ import com.yi.kotlin.R
  * @date 2020/4/2
  */
 
-class BaseApplication : AbstractApplication() {
+class BaseApplication : BaseApplication() {
     companion object {
         val TAG = BaseApplication::class.java.simpleName
 

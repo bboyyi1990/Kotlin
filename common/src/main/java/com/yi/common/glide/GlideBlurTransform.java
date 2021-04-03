@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
-import com.yi.common.base.AbstractApplication;
+import com.yi.common.base.BaseApplication;
 
 import java.security.MessageDigest;
 
@@ -32,7 +32,7 @@ public class GlideBlurTransform extends BitmapTransformation {
 
     @Override
     protected Bitmap transform(@NonNull BitmapPool pool, @NonNull Bitmap toTransform, int outWidth, int outHeight) {
-        return blurBitmap(AbstractApplication.Companion.getInstance(), toTransform, BLUR_RADIUS, outWidth, outHeight);
+        return blurBitmap(BaseApplication.Companion.getInstance(), toTransform, BLUR_RADIUS, outWidth, outHeight);
     }
 
     @Override

@@ -9,7 +9,7 @@ import android.os.Build
 import android.view.View
 import android.view.WindowManager
 import android.widget.PopupWindow
-import com.yi.common.base.AbstractApplication
+import com.yi.common.base.BaseApplication
 
 /**
  * @author Yi
@@ -24,7 +24,7 @@ object UIUtil {
      * @return
      */
     fun dip2Pixel(dp: Int): Int {
-        val res: Resources = AbstractApplication.getInstance().resources
+        val res: Resources = BaseApplication.getInstance().resources
         return dip2Pixel(dp, res)
     }
 
@@ -69,7 +69,7 @@ object UIUtil {
     private fun initScreenSize() {
         if (screenSize == null) {
             screenSize = Point()
-            val wm = AbstractApplication.getInstance()
+            val wm = BaseApplication.getInstance()
                 .getSystemService(Application.WINDOW_SERVICE) as WindowManager
             wm.defaultDisplay.getSize(screenSize)
         }
@@ -79,7 +79,7 @@ object UIUtil {
      * 获取状态栏高度
      */
     fun getStatusBarHeight(): Int {
-        val resources: Resources = AbstractApplication.getInstance().resources
+        val resources: Resources = BaseApplication.getInstance().resources
         val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
         return resources.getDimensionPixelSize(resourceId)
     }

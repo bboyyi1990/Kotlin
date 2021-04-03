@@ -1,14 +1,11 @@
-package com.yi.kotlin.action.base
+package com.yi.kotlin.action.api
 
 import android.util.Base64
-import com.yi.common.http.BaseResponse
+import com.yi.common.http.BaseAction
+import com.yi.common.http.BaseData
 import com.yi.common.http.RetrofitClient
 import com.yi.common.util.MemoryUtil
 import com.yi.kotlin.BuildConfig
-import com.yi.kotlin.http.base.BaseCallback
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import java.security.KeyFactory
 import java.security.interfaces.RSAPublicKey
 import java.security.spec.X509EncodedKeySpec
@@ -19,57 +16,21 @@ import javax.crypto.Cipher
  * @author Yi
  * @date 2020/5/9
  */
-open abstract class BaseAction<BaseData> {
+open abstract class ApiAction<T : BaseData> : BaseAction<T>() {
     private val PUBLIC_KEY = ""
     private val APPKEY = ""
 
-    protected fun getApi() = RetrofitClient.api
+    override fun getApi(): ApiService = RetrofitClient.getApi(ApiService::class.java).value
 
-    /**
-     * final execute method
-     * @param params
-     * @param callback if don't care about result,can enter null
-     */
-    protected fun execute(
-        callback: BaseCallback<BaseData>?,
-        params: MutableMap<String, Any> = mutableMapOf()
-    ) {
-        buildBody(params)
-        val headers = buildHeaders()
-        val api = getApiObservable(headers, params)
-        var task = api.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-        if (null == callback) task.subscribe() else task.subscribe(callback)
-    }
-
-    /**
-     * 获取api接口
-     * 参数交由子类包装接口
-     */
-    abstract fun getApiObservable(
-        headers: MutableMap<String, Any>,
-        params: MutableMap<String, Any>
-    ): Observable<BaseResponse<BaseData>>
-
-    /**
-     * 构建请求参数
-     */
-    private fun buildBody(params: MutableMap<String, Any> = mutableMapOf()): MutableMap<String, Any> {
-        params["common"] = 1
-        params["value"] = "1"
+    override fun buildParams(params: MutableMap<String, Any>): MutableMap<String, Any> {
         params["sign"] = createSign(params)
         return params
     }
 
-    /**
-     * 构建请求头
-     */
-    private fun buildHeaders(headers: MutableMap<String, Any> = mutableMapOf()): MutableMap<String, Any> {
-        //TODO add header content
-        headers["userToken"] = MemoryUtil.getString("userToken","")!!
+    override fun buildHeaders(headers: MutableMap<String, Any>): MutableMap<String, Any> {
+        headers["userToken"] = MemoryUtil.getString("userToken", "")!!
         headers["version"] = BuildConfig.VERSION_CODE
         headers["language"] = "ZH"
-        headers["device"] = "Android"
         return headers
     }
 

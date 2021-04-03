@@ -1,6 +1,5 @@
-package com.yi.kotlin.http.base
+package com.yi.common.http
 
-import com.yi.common.http.BaseResponse
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
@@ -8,8 +7,10 @@ import io.reactivex.disposables.Disposable
 /**
  * @author Yi
  * @date 2020/5/9
+ * 抽象请求回调
+ * 上层模块使用需要继承此类
  */
-open abstract class BaseCallback<BaseData> : Observer<BaseResponse<BaseData>> {
+open abstract class BaseCallback<T : BaseData> : Observer<BaseResponse<T>> {
     override fun onComplete() {
         requestComplete()
     }
@@ -17,7 +18,7 @@ open abstract class BaseCallback<BaseData> : Observer<BaseResponse<BaseData>> {
     override fun onSubscribe(d: Disposable) {
     }
 
-    override fun onNext(t: BaseResponse<BaseData>) {
+    override fun onNext(t: BaseResponse<T>) {
     }
 
     override fun onError(e: Throwable) {

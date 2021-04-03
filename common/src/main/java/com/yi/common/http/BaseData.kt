@@ -1,4 +1,4 @@
-package com.yi.kotlin.base
+package com.yi.common.http
 
 import androidx.databinding.BaseObservable
 

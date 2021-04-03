@@ -1,7 +1,7 @@
 package com.yi.common.util
 
 import android.widget.Toast
-import com.yi.common.base.AbstractApplication
+import com.yi.common.base.BaseApplication
 
 /**
  * @author Yi
@@ -10,7 +10,7 @@ import com.yi.common.base.AbstractApplication
 object ToastUtil {
     private val toast_default by lazy {
         Toast.makeText(
-            AbstractApplication.getInstance(),
+            BaseApplication.getInstance(),
             "",
             Toast.LENGTH_SHORT
         )
