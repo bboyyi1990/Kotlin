@@ -8,7 +8,7 @@ import android.os.Build
 import android.provider.Settings
 import android.telephony.TelephonyManager
 import com.yi.common.BuildConfig
-import com.yi.common.base.BaseApplication
+import com.yi.common.base.CommonBaseApplication
 import java.net.Inet4Address
 import java.net.NetworkInterface
 import java.net.SocketException
@@ -21,7 +21,7 @@ object MobileUtil {
     val OS = "android"
 
     fun getAndroidId() = Settings.Secure.getString(
-        BaseApplication.getInstance().contentResolver,
+        CommonBaseApplication.getInstance().contentResolver,
         Settings.Secure.ANDROID_ID
     )
 
@@ -29,7 +29,7 @@ object MobileUtil {
     fun getIMEI(): String? {
         var imei: String? = null
         try {
-            var manager = BaseApplication.getInstance()
+            var manager = CommonBaseApplication.getInstance()
                 .getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
             imei = manager.deviceId
         } catch (e: Exception) {
@@ -63,7 +63,7 @@ object MobileUtil {
 
     fun getNetStatus(): String? {
         return try {
-            val connectivityManager = BaseApplication.getInstance()
+            val connectivityManager = CommonBaseApplication.getInstance()
                 .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val activeNetInfo = connectivityManager.activeNetworkInfo
             if (activeNetInfo != null && activeNetInfo.type == ConnectivityManager.TYPE_WIFI) {
@@ -91,7 +91,7 @@ object MobileUtil {
     }
 
     fun getMetaData(key: String): String? {
-        var context = BaseApplication.getInstance()
+        var context = CommonBaseApplication.getInstance()
         var manager = context?.packageManager
         var applicationInfo =
             manager?.getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)

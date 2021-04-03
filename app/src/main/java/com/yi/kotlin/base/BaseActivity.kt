@@ -1,27 +1,24 @@
 package com.yi.kotlin.base
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gyf.immersionbar.OnKeyboardListener
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yi.common.base.CommonBaseActivity
 import com.yi.common.base.ActivityManager
-import com.yi.common.util.Logger
 
 /**
  * @author Yi
  * @date 2020/4/2
  */
-open abstract class BaseActivity : AppCompatActivity() {
+open abstract class BaseActivity : CommonBaseActivity() {
 
     companion object {
-        val TAG = BaseActivity::class.java.simpleName;
+        val TAG = CommonBaseActivity::class.java.simpleName;
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Logger.e(TAG, this::class.java.simpleName)
-        ActivityManager.addActivity(this)
         ARouter.getInstance().inject(this)
         initBar()
         setContentView(getLayout())

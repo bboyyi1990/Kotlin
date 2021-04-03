@@ -88,7 +88,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation "androidx.activity:activity-ktx:1.2.0"
+
 
     //immersion bar
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'

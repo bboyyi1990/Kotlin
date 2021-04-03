@@ -8,13 +8,13 @@ import com.tencent.mmkv.MMKV
  * 底层application ，用于向底层提供context
  * 上次需要继承此类
  */
-abstract class BaseApplication : Application() {
+abstract class CommonBaseApplication : Application() {
     companion object {
-        val TAG = BaseApplication::class.java.simpleName
+        val TAG = CommonBaseApplication::class.java.simpleName
 
-        private lateinit var application: BaseApplication
+        private lateinit var application: CommonBaseApplication
 
-        fun getInstance(): BaseApplication {
+        fun getInstance(): CommonBaseApplication {
             return application
         }
     }

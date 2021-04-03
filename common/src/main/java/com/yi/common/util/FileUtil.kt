@@ -1,7 +1,7 @@
 package com.yi.common.util
 
 import android.os.Environment
-import com.yi.common.base.BaseApplication
+import com.yi.common.base.CommonBaseApplication
 import java.io.File
 import java.math.BigDecimal
 
@@ -15,7 +15,7 @@ object FileUtil {
      * 此路径写入文件在应用卸载后会自动删除
      */
     private fun getAppDir(): File? {
-        var root = BaseApplication.getInstance().getExternalFilesDir(null)
+        var root = CommonBaseApplication.getInstance().getExternalFilesDir(null)
         return root
     }
 
@@ -51,10 +51,10 @@ object FileUtil {
     fun getCacheSize(): String {
         var cacheSize = 0L
         cacheSize =
-            getFolderSize(BaseApplication.getInstance().cacheDir)
+            getFolderSize(CommonBaseApplication.getInstance().cacheDir)
         if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
             cacheSize += getFolderSize(
-                BaseApplication.getInstance().externalCacheDir
+                CommonBaseApplication.getInstance().externalCacheDir
             )
         }
         return getFormatSize(cacheSize)
@@ -64,9 +64,9 @@ object FileUtil {
      * 清除缓存
      */
     fun clearCache() {
-        deleteDir(BaseApplication.getInstance().cacheDir)
+        deleteDir(CommonBaseApplication.getInstance().cacheDir)
         if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-            deleteDir(BaseApplication.getInstance().externalCacheDir)
+            deleteDir(CommonBaseApplication.getInstance().externalCacheDir)
         }
     }
 

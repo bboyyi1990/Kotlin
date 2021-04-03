@@ -6,7 +6,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.yi.common.BuildConfig
-import com.yi.common.base.BaseApplication
+import com.yi.common.base.CommonBaseApplication
 import com.yi.kotlin.R
 
 /**
@@ -14,13 +14,13 @@ import com.yi.kotlin.R
  * @date 2020/4/2
  */
 
-class BaseApplication : BaseApplication() {
+class BaseApplication : CommonBaseApplication() {
     companion object {
-        val TAG = BaseApplication::class.java.simpleName
+        val TAG = CommonBaseApplication::class.java.simpleName
 
-        private lateinit var application: BaseApplication
+        private lateinit var application: CommonBaseApplication
 
-        fun getInstance(): BaseApplication {
+        fun getInstance(): CommonBaseApplication {
             return application
         }
     }
