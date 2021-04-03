@@ -16,19 +16,6 @@ object RetrofitClient {
     private const val TAG = "retrofit"
     private const val API_SERVICE = "https://pre.newpay.la/api/"
 
-//    lateinit var api: BaseApi
-
-//    fun injectApi(clazz: Class<Any>, baseUrl: String) {
-//        var retrofit = Retrofit.Builder()
-//            .baseUrl(baseUrl)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//            .client(getHttpClient())
-//            .build()
-//        val clazz = null
-//        api = retrofit.create(clazz)
-//    }
-
     fun <T> getApi(java: Class<T>) = lazy {
         var retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(API_SERVICE)

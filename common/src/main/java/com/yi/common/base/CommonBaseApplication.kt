@@ -2,11 +2,14 @@ package com.yi.common.base
 
 import android.app.Application
 import com.tencent.mmkv.MMKV
+import com.yi.common.BuildConfig
+import com.yi.common.util.CrashHandler
+import com.yi.common.util.Logger
 
 /**
  * create by Yi on 2021/4/3
  * 底层application ，用于向底层提供context
- * 上次需要继承此类
+ * 上层需要继承此类
  */
 abstract class CommonBaseApplication : Application() {
     companion object {
@@ -27,16 +30,15 @@ abstract class CommonBaseApplication : Application() {
     }
 
     private fun initCrashHandler() {
-//        if (BuildConfig.DEBUG) {
-//            return
-//        }
-        //运行异常捕获的使用
-//        CrashHandler.install(object : CrashHandler.CrashCallback {
-//            override fun handlerException(thread: Thread, throwable: Throwable) {
-//                if (throwable != null) {
-//                    Logger.e(TAG, "Exception ===${throwable.message}")
-//                }
-//            }
-//        })
+        if (BuildConfig.DEBUG) {
+            return
+        }
+        CrashHandler.install(object : CrashHandler.CrashCallback {
+            override fun handlerException(thread: Thread, throwable: Throwable) {
+                if (throwable != null) {
+                    Logger.e(TAG, "Exception ===${throwable.message}")
+                }
+            }
+        })
     }
 }
