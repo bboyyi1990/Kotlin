@@ -8,19 +8,15 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
  * create by Yi on 2021/4/3
  * 圆角裁剪
  */
-class CenterCropRoundCornerTransform(height: Int, weight: Int, radius: Int) :
+class CenterCropRoundCornerTransform(radius: Int) :
     CenterCrop() {
     private var radius = 0
     private var isLeftTop = false
     private var isRightTop = false
     private var isLeftBottom = false
     private var isRightBotoom = false
-    private var height = 0
-    private var weight = 0
 
     init {
-        this.height = height
-        this.weight = weight
         this.radius = radius
     }
 
@@ -60,7 +56,7 @@ class CenterCropRoundCornerTransform(height: Int, weight: Int, radius: Int) :
         outWidth: Int,
         outHeight: Int
     ): Bitmap {
-        val transform = super.transform(pool, toTransform, weight, height)
+        val transform = super.transform(pool, toTransform, outWidth, outHeight)
         return roundCrop(pool, transform)
     }
 

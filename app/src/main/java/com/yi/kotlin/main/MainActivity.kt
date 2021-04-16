@@ -9,6 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.OnKeyboardListener
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
+import com.yi.common.glide.GlideUtil
 import com.yi.common.http.BaseResponse
 import com.yi.kotlin.R
 import com.yi.kotlin.base.BaseActivity
@@ -44,6 +45,9 @@ class MainActivity : BaseActivity() {
 
     private val model by viewModels<MainViewModel>()
 
+    private val path =
+        "http://pre-newpay-chat.oss-ap-southeast-1.aliyuncs.com/d0401bd6518a441787b218e1016dc5d7.png?x-oss-process=image/resize,w_70,h_70"
+
     override fun onCreate() {
         val bindingUtil = DataBindingUtil.setContentView<ActivityMainBinding>(this, getLayout())
         bindingUtil.mainData = model.mainData
@@ -54,6 +58,13 @@ class MainActivity : BaseActivity() {
         recycler_main.adapter = adapter
         adapter.setOnItemChildClickListener { adapter, view, position -> }
         model.getData(0)
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        GlideUtil.loadImage(path, 10, GlideUtil.TOP_ROUND, 0, 0, iv_main, false)
     }
 
     private var keyboardListener = OnKeyboardListener { isPopup, keyboardHeight ->

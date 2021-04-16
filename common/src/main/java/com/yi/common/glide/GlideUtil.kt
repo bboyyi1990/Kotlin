@@ -62,7 +62,7 @@ object GlideUtil {
                 list.add(requestOptions)
             }
             ROUND -> {
-                val transform = CenterCropRoundCornerTransform(h, w, radius)
+                val transform = CenterCropRoundCornerTransform(radius)
                 transform.setNeedCorner(true, true, true, true)
                 val options: RequestOptions =
                     RequestOptions().placeholder(R.color.common_transparent_color)
@@ -70,7 +70,7 @@ object GlideUtil {
                 list.add(options)
             }
             TOP_ROUND -> {
-                val transform = CenterCropRoundCornerTransform(h, w, radius)
+                val transform = CenterCropRoundCornerTransform(radius)
                 transform.setNeedCorner(true, true, false, false)
                 val options: RequestOptions =
                     RequestOptions().placeholder(R.color.common_transparent_color)
@@ -86,9 +86,7 @@ object GlideUtil {
         }
         //最终框架载入
         val requestBuilder: RequestBuilder<*> = Glide.with(view).load(path)
-        for (i in list.indices) {
-            requestBuilder.apply(list[i])
-        }
+        list.forEach { requestBuilder.apply(it) }
         requestBuilder.into(view)
     }
 
