@@ -10,15 +10,11 @@ import com.gyf.immersionbar.OnKeyboardListener
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.yi.common.glide.GlideUtil
-import com.yi.common.http.BaseResponse
+import com.yi.common.util.Logger
 import com.yi.kotlin.R
 import com.yi.kotlin.base.BaseActivity
 import com.yi.kotlin.base.Router
 import com.yi.kotlin.databinding.ActivityMainBinding
-import com.yi.common.util.Logger
-import com.yi.kotlin.action.api.ApiCallback
-import com.yi.kotlin.action.user.CheckRegisteredAction
-import com.yi.common.http.BaseData
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -82,16 +78,16 @@ class MainActivity : BaseActivity() {
     }
 
     private var clickListener = View.OnClickListener { view ->
+        TestDialogFragment.getInstant().show(supportFragmentManager, "")
 //        LoginAction("1", "12", object : ApiCallback<LoginData>() {
 //            override fun onNext(t: BaseResponse<LoginData>) {
 //            }
 //        })
-        CheckRegisteredAction().enqueue("11111111111", "+86", object : ApiCallback<BaseData>() {
-            override fun onNext(t: BaseResponse<BaseData>) {
-//                super.onNext(t)
-                var data = t.data
-                Logger.e(TAG, "data is $data")
-            }
-        })
+//        CheckRegisteredAction().enqueue("11111111111", "+86", object : ApiCallback<BaseData>() {
+//            override fun onNext(t: BaseResponse<BaseData>) {
+//                var data = t.data
+//                Logger.e(TAG, "data is $data")
+//            }
+//        })
     }
 }
