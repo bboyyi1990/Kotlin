@@ -18,7 +18,7 @@ object MemoryUtil {
         }
 
 
-    fun getString(key: String, defaultValue: String?) = mmkv.getString(key, defaultValue)
+    fun getString(key: String, defaultValue: String? = null) = mmkv.getString(key, defaultValue)
 
     fun saveLong(key: String, value: Long?) =
         if (null == value) {

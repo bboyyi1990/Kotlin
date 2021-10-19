@@ -4,6 +4,7 @@ import android.app.Application
 import com.tencent.mmkv.MMKV
 import com.yi.common.BuildConfig
 import com.yi.common.util.CrashHandler
+import com.yi.common.util.LanguageUtils
 import com.yi.common.util.Logger
 
 /**
@@ -27,6 +28,7 @@ abstract class CommonBaseApplication : Application() {
         application = this
         MMKV.initialize(this)
         initCrashHandler()
+        LanguageUtils.init(this)
     }
 
     private fun initCrashHandler() {

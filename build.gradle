@@ -48,7 +48,7 @@ subprojects {
             buildToolsVersion '30.0.3'
             defaultConfig {
                 targetSdkVersion 30
-                minSdkVersion 24
+                minSdkVersion 23
                 versionCode 1
                 versionName "1.0"
                 flavorDimensions "default"

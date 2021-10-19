@@ -24,7 +24,7 @@
                 android:layout_height="56dp"
                 android:layout_marginTop="25dp"
                 android:gravity="center"
-                android:text="@{mainData.title}" />
+                android:text="@string/title" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_main"
@@ -32,10 +32,16 @@
                 android:layout_height="50dp" />
 
             <ImageView
-                android:background="@color/colorAccent"
                 android:id="@+id/iv_main"
                 android:layout_width="70dp"
-                android:layout_height="70dp"/>
+                android:layout_height="70dp"
+                android:background="@color/colorAccent" />
+
+            <Button
+                android:id="@+id/language_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="change language" />
 
         </LinearLayout>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>

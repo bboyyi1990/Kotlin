@@ -37,6 +37,7 @@ class WelcomeActivity : BaseActivity() {
                 params["value"] = "welcome to kotlin"
                 params["digit"] = 1000
                 Router.route(MainActivity::class.java, params)
+                finish()
             }
     }
 }

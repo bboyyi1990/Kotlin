@@ -1,5 +1,6 @@
 package com.yi.kotlin.main
 
+import android.content.Intent
 import android.view.View
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
@@ -10,12 +11,16 @@ import com.gyf.immersionbar.OnKeyboardListener
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.yi.common.glide.GlideUtil
+import com.yi.common.util.LanguageUtils
 import com.yi.common.util.Logger
 import com.yi.kotlin.R
+import com.yi.kotlin.alert.IOSSelectDialog
 import com.yi.kotlin.base.BaseActivity
 import com.yi.kotlin.base.Router
 import com.yi.kotlin.databinding.ActivityMainBinding
+import com.yi.kotlin.welcome.WelcomeActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 /**
  * @author Yi
@@ -54,13 +59,37 @@ class MainActivity : BaseActivity() {
         recycler_main.adapter = adapter
         adapter.setOnItemChildClickListener { adapter, view, position -> }
         model.getData(0)
-
-
+        title_tv.text = getString(R.string.title)
+        language_btn.setOnClickListener {
+            IOSSelectDialog(this@MainActivity).addOptions(
+                arrayOf("中文", "LO", "English")
+            ) { position ->
+                when (position) {
+                    0 -> LanguageUtils.changeLanguage(this@MainActivity, LanguageUtils.ZH)
+                    1 -> LanguageUtils.changeLanguage(this@MainActivity, LanguageUtils.LO)
+                    2 -> LanguageUtils.changeLanguage(this@MainActivity, LanguageUtils.EN)
+                }
+                finish()
+                val intent = Intent(this@MainActivity, MainActivity::class.java)
+                startActivity(intent)
+            }.show()
+        }
     }
 
     override fun onResume() {
         super.onResume()
         GlideUtil.loadImage(path, 10, GlideUtil.TOP_ROUND, 0, 0, iv_main, false)
+        title_tv.text = getString(R.string.title)
+        val language = resources.configuration.locale.language
+        Logger.e(TAG, "language is $language")
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        if (intent?.action == null) {
+            finish()
+            val intent = Intent(this, MainActivity::class.java)
+        }
     }
 
     private var keyboardListener = OnKeyboardListener { isPopup, keyboardHeight ->
