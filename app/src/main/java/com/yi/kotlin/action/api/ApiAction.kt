@@ -6,6 +6,8 @@ import com.yi.common.http.BaseData
 import com.yi.common.http.RetrofitClient
 import com.yi.common.util.MemoryUtil
 import com.yi.kotlin.BuildConfig
+import okhttp3.Interceptor
+import okhttp3.Response
 import java.security.KeyFactory
 import java.security.interfaces.RSAPublicKey
 import java.security.spec.X509EncodedKeySpec
@@ -19,8 +21,13 @@ import javax.crypto.Cipher
 open abstract class ApiAction<T : BaseData> : BaseAction<T>() {
     private val PUBLIC_KEY = ""
     private val APPKEY = ""
+    private val BASE_URL = ""
 
-    override fun getApi(): ApiService = RetrofitClient.getApi(ApiService::class.java).value
+    override fun getApi(): ApiService =
+        RetrofitClient.getApi(ApiService::class.java, BASE_URL, Interceptor { chain ->
+            //TODO customize your request params
+            chain.proceed(chain.request())
+        })
 
     override fun buildParams(params: MutableMap<String, Any>): MutableMap<String, Any> {
         params["sign"] = createSign(params)

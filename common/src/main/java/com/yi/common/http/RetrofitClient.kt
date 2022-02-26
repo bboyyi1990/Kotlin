@@ -1,12 +1,13 @@
 package com.yi.common.http
 
 import com.yi.common.util.Logger
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.reflect.KClass
+import java.util.*
 
 /**
  * @author Yi
@@ -14,33 +15,36 @@ import kotlin.reflect.KClass
  */
 object RetrofitClient {
     private const val TAG = "retrofit"
-    private const val API_SERVICE = "https://pre.newpay.la/api/"
 
-    fun <T> getApi(java: Class<T>) = lazy {
+    private var api: Any? = null
+
+    fun <T> getApi(java: Class<T>, baseUrl: String, interceptor: Interceptor): T {
+        if (api == null) {
+            api = create(java, baseUrl, interceptor)
+        }
+        return api as T
+    }
+
+    private fun <T> create(java: Class<T>, baseUrl: String, interceptor: Interceptor) {
         var retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl(API_SERVICE)
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(getHttpClient())
+            .client(getHttpClient(interceptor))
             .build()
         retrofit.create(java)
     }
 
-    private fun getHttpClient(): OkHttpClient {
+    private fun getHttpClient(interceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor { chain ->
-                chain.proceed(
-                    chain.request().newBuilder().addHeader("content-type", "application/json")
-                        .build()
-                )
-            }
+            .addInterceptor(interceptor)
             .addInterceptor(
-                HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { message ->
+                HttpLoggingInterceptor { message ->
                     Logger.e(
                         TAG,
                         message
                     )
-                }).setLevel(HttpLoggingInterceptor.Level.BODY)
+                }.setLevel(HttpLoggingInterceptor.Level.BODY)
             )
             .build()
     }
