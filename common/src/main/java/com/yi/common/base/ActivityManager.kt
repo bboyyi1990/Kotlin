@@ -22,9 +22,7 @@ object ActivityManager {
     }
 
     fun clearAllActivity() {
-        for (activity in stacks) {
-            activity.finish()
-        }
+        stacks.forEach { it.finish() }
         stacks.clear()
     }
 

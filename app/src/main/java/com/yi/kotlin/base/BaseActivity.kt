@@ -25,11 +25,6 @@ open abstract class BaseActivity : CommonBaseActivity() {
         onCreate()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        ActivityManager.removeActivity(this)
-    }
-
     /**
      * 系统栏设置
      * fits - true 布局内容留出系统栏位置 / false 布局内容拉伸到系统栏底部，会被系统栏覆盖
