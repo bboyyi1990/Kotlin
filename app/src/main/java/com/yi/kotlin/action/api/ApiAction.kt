@@ -21,7 +21,7 @@ import javax.crypto.Cipher
 open abstract class ApiAction<T : BaseData> : BaseAction<T>() {
     private val PUBLIC_KEY = ""
     private val APPKEY = ""
-    private val BASE_URL = ""
+    private val BASE_URL = BuildConfig.API_SERVICE
 
     override fun getApi(): ApiService =
         RetrofitClient.getApi(ApiService::class.java, BASE_URL, Interceptor { chain ->

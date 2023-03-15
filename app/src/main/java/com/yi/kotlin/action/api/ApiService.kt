@@ -33,4 +33,12 @@ interface ApiService {
         @HeaderMap headers: MutableMap<String, Any>,
         @Body() params: MutableMap<String, Any>
     ): Observable<BaseResponse<LoginData>>
+
+
+    //替换baseUrl 方式注解
+//    @GET()
+//    fun replaceBaseUrl(@Url url: String = "https://www.baidu.com"): Observable<BaseResponse<LoginData>>
+    //替换baseUrl 方式注解2 @HTTP 注解，path指名全路径
+//    @HTTP(method = "GET", path = "https://www.baidu.com")
+//    fun replaceBaseUrl(): Observable<BaseResponse<LoginData>>
 }

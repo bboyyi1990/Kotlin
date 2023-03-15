@@ -2,7 +2,6 @@ package com.yi.common.http
 
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 /**
  * create by Yi on 2021/4/4
@@ -32,8 +31,8 @@ open abstract class BaseAction<T : BaseData> {
         buildParams(params)
         val headers = buildHeaders()
         val api = getApiObservable(headers, params)
-        var task = api.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        //指定请求结果在主线程返回。子线程切换见HttpClient 封装
+        var task = api.observeOn(AndroidSchedulers.mainThread())
         if (null == callback) task.subscribe() else task.subscribe(callback)
     }
 }

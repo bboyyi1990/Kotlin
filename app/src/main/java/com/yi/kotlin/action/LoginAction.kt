@@ -1,8 +1,8 @@
 package com.yi.kotlin.action
 
-import com.yi.kotlin.action.api.ApiCallback
 import com.yi.common.http.BaseResponse
 import com.yi.kotlin.action.api.ApiAction
+import com.yi.kotlin.action.api.ApiCallback
 import com.yi.kotlin.data.LoginData
 import io.reactivex.Observable
 
@@ -26,7 +26,8 @@ class LoginAction() : ApiAction<LoginData>() {
         headers: MutableMap<String, Any>,
         params: MutableMap<String, Any>
     ): Observable<BaseResponse<LoginData>> {
-        return getApi().userPOST("",headers,params)
+//        return getApi().userPOST("",headers,params)
+        return getApi().replaceBaseUrl()
     }
 
 
