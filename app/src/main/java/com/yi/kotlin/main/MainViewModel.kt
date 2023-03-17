@@ -1,13 +1,15 @@
 package com.yi.kotlin.main
 
-import android.util.Log
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.yi.common.database.User
+import com.yi.common.util.Logger
 import com.yi.kotlin.base.BaseViewModel
 import com.yi.kotlin.data.LoginData
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 /**
@@ -27,7 +29,6 @@ class MainViewModel : BaseViewModel() {
                     list.add(LoginData("title is $i"))
                 }
             }
-
 //        Observable.interval(2, TimeUnit.SECONDS)
 //            .subscribeOn(Schedulers.io())
 //            .subscribe(Consumer {
@@ -40,6 +41,16 @@ class MainViewModel : BaseViewModel() {
     override fun onCleared() {
         super.onCleared()
 
+    }
+
+    fun insertData() {
+
+        viewModelScope.launch(Dispatchers.IO) {
+            val user = User()
+            user.id = 1
+            user.name = "1"
+            User.getDao().insert(user)
+        }
     }
 }
 

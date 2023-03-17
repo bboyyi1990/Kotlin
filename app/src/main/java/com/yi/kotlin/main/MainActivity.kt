@@ -1,6 +1,7 @@
 package com.yi.kotlin.main
 
 import android.content.Intent
+import android.os.Build
 import android.view.View
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
@@ -10,6 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.OnKeyboardListener
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
+import com.yi.common.database.User
 import com.yi.common.glide.GlideUtil
 import com.yi.common.http.BaseResponse
 import com.yi.common.util.LanguageUtils
@@ -22,9 +24,7 @@ import com.yi.kotlin.base.BaseActivity
 import com.yi.kotlin.base.Router
 import com.yi.kotlin.data.LoginData
 import com.yi.kotlin.databinding.ActivityMainBinding
-import com.yi.kotlin.welcome.WelcomeActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 /**
  * @author Yi
@@ -116,11 +116,29 @@ class MainActivity : BaseActivity() {
             override fun onNext(t: BaseResponse<LoginData>) {
             }
         })
+
+        model.insertData()
+
+        User.getDao().queryAllLiveDate().observe(this) {
+            Logger.e("viewmodel ", "data observer ${it.size}")
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            User.getDao().queryAllObservable().subscribe {
+                Logger.e("viewmodel ", "queryAllObservable ${it.size}")
+            }
+        }
 //        CheckRegisteredAction().enqueue("11111111111", "+86", object : ApiCallback<BaseData>() {
 //            override fun onNext(t: BaseResponse<BaseData>) {
 //                var data = t.data
 //                Logger.e(TAG, "data is $data")
 //            }
 //        })
+
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+//        RealmHelper.getRealDb().close()
     }
 }

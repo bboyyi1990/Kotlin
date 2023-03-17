@@ -29,6 +29,11 @@ abstract class CommonBaseApplication : Application() {
         MMKV.initialize(this)
         initCrashHandler()
         LanguageUtils.init(this)
+        initDataBase()
+    }
+
+    private fun initDataBase() {
+//        Realm.init(this)
     }
 
     private fun initCrashHandler() {
