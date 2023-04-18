@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Build
 import android.view.View
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -14,8 +13,10 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.yi.common.database.User
 import com.yi.common.glide.GlideUtil
 import com.yi.common.http.BaseResponse
+import com.yi.common.util.ClickInterceptor
 import com.yi.common.util.LanguageUtils
 import com.yi.common.util.Logger
+import com.yi.common.util.setOnClicker
 import com.yi.kotlin.R
 import com.yi.kotlin.action.LoginAction
 import com.yi.kotlin.action.api.ApiCallback
@@ -23,7 +24,6 @@ import com.yi.kotlin.alert.IOSSelectDialog
 import com.yi.kotlin.base.BaseActivity
 import com.yi.kotlin.base.Router
 import com.yi.kotlin.data.LoginData
-import com.yi.kotlin.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -54,10 +54,11 @@ class MainActivity : BaseActivity() {
         "http://pre-newpay-chat.oss-ap-southeast-1.aliyuncs.com/d0401bd6518a441787b218e1016dc5d7.png?x-oss-process=image/resize,w_70,h_70"
 
     override fun onCreate() {
-        val bindingUtil = DataBindingUtil.setContentView<ActivityMainBinding>(this, getLayout())
-        bindingUtil.mainData = model.mainData
+//        val bindingUtil = DataBindingUtil.setContentView<ActivityMainBinding>(this, getLayout())
+//        bindingUtil.mainData = model.mainData
         initBar(true, keyboardListener)
-        title_tv.setOnClickListener(clickListener)
+//        title_tv.setOnClickListener(clickListener)
+        title_tv.setOnClicker(clickListener)
         refresh_layout.setOnRefreshLoadMoreListener(refreshListener)
         recycler_main.layoutManager = LinearLayoutManager(this)
         recycler_main.adapter = adapter
@@ -111,22 +112,26 @@ class MainActivity : BaseActivity() {
     }
 
     private var clickListener = View.OnClickListener { view ->
-        TestDialogFragment.getInstant().show(supportFragmentManager, "")
-        LoginAction("1", "12", object : ApiCallback<LoginData>() {
-            override fun onNext(t: BaseResponse<LoginData>) {
-            }
-        })
 
-        model.insertData()
 
-        User.getDao().queryAllLiveDate().observe(this) {
-            Logger.e("viewmodel ", "data observer ${it.size}")
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            User.getDao().queryAllObservable().subscribe {
-                Logger.e("viewmodel ", "queryAllObservable ${it.size}")
-            }
-        }
+//        TestDialogFragment.getInstant().show(supportFragmentManager, "")
+//        LoginAction("1", "12", object : ApiCallback<LoginData>() {
+//            override fun onNext(t: BaseResponse<LoginData>) {
+//            }
+//        })
+//
+//        model.insertData()
+//
+//        User.getDao().queryAllLiveDate().observe(this) {
+//            Logger.e("viewmodel ", "data observer ${it.size}")
+//        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            User.getDao().queryAllObservable().subscribe {
+//                Logger.e("viewmodel ", "queryAllObservable ${it.size}")
+//            }
+//        }
+
+
 //        CheckRegisteredAction().enqueue("11111111111", "+86", object : ApiCallback<BaseData>() {
 //            override fun onNext(t: BaseResponse<BaseData>) {
 //                var data = t.data

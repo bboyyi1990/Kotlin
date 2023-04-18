@@ -17,9 +17,9 @@ object Router {
     const val GROUP = "/activity/"
     //example -  yi://kotlin/activity/MainActivity
 
-    fun route(clazz: Class<out BaseActivity>) = this.route(clazz, null)
+    fun route(clazz: Class<out Activity>) = this.route(clazz, null)
 
-    fun route(clazz: Class<out BaseActivity>, params: Map<String, Any>?) {
+    fun route(clazz: Class<out Activity>, params: Map<String, Any>?) {
         var uri = buildUri(clazz, params)
         Logger.e(TAG, "route uri = $uri")
         ARouter.getInstance().build(uri).navigation()

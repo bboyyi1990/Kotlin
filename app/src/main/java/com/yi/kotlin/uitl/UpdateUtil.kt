@@ -50,6 +50,7 @@ object UpdateUtil {
                     when (cause) {
                         EndCause.COMPLETED -> installApk(task.file?.path)
                         EndCause.ERROR -> realCause?.message
+                        else -> {}
                     }
                 }
 

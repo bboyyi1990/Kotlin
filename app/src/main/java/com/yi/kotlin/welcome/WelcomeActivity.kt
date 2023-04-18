@@ -1,5 +1,6 @@
 package com.yi.kotlin.welcome
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Window
@@ -9,6 +10,7 @@ import com.yi.kotlin.R
 import com.yi.kotlin.base.BaseActivity
 import com.yi.kotlin.base.Router
 import com.yi.kotlin.main.MainActivity
+import com.yi.kotlin.main.MainComposeActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -37,6 +39,7 @@ class WelcomeActivity : BaseActivity() {
                 params["value"] = "welcome to kotlin"
                 params["digit"] = 1000
                 Router.route(MainActivity::class.java, params)
+//                Router.route(MainComposeActivity::class.java, params)
                 finish()
             }
     }
