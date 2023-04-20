@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/check"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="check"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/back_arrow"
+        android:title="check"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/run"
+        android:icon="@drawable/back_arrow"
+        android:title="check"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/jump"
+        android:icon="@drawable/back_arrow"
+        android:title="check"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/cry"
+        android:icon="@drawable/back_arrow"
+        android:title="check"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/navigation"
+        android:icon="@drawable/back_arrow"
+        android:title="navigation"
+        app:showAsAction="ifRoom" />
+
+</menu>

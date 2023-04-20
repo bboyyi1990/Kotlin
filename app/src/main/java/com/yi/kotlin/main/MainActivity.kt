@@ -46,7 +46,13 @@ class MainActivity : BaseActivity() {
     @Autowired(name = "digit")
     var digit: String? = null
 
-    private val adapter by lazy { MainAdapter() }
+    private val adapter by lazy {
+        MainAdapter().apply {
+            repeat(30) {
+                addData(LoginData("title = $it"))
+            }
+        }
+    }
 
     private val model by viewModels<MainViewModel>()
 

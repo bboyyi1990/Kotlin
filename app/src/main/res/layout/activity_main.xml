@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <!--    <data>-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="#009688"
+        app:menu="@menu/main_menu"
+        app:navigationIcon="@drawable/back_arrow"
+        app:popupTheme="@style/Widget.AppCompat.PopupMenu.Overflow">
 
-    <!--        <variable-->
-    <!--            name="mainData"-->
-    <!--            type="com.yi.kotlin.data.LoginData" />-->
-    <!--    </data>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="this is view" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refresh_layout"
@@ -47,4 +59,4 @@
 
         </LinearLayout>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-</FrameLayout>
+</LinearLayout>
