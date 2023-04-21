@@ -92,7 +92,7 @@ object MobileUtil {
 
     fun getMetaData(key: String): String? {
         var context = CommonBaseApplication.getInstance()
-        var manager = context?.packageManager
+        var manager = context.packageManager
         var applicationInfo =
             manager?.getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
         var result = applicationInfo?.metaData?.getString(key)

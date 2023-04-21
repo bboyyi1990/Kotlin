@@ -61,14 +61,3 @@ subprojects {
         print "here is afterEvaluate$project.android.defaultConfig.versionName \n"
     }
 }
-
-ext {
-    supportLibraryVersion = "29.0.0"
-    var = [
-//            SupportV4            : "com.android.support:support-v4:$supportLibraryVersion",
-//            SupportV7            : "com.android.support:appcompat-v7:$supportLibraryVersion",
-//            SupportRecyclerviewV7: "com.android.support:recyclerview-v7:$supportLibraryVersion",
-//            SupportDesign        : "com.android.support:design:$supportLibraryVersion",
-//            SupportCardView      : "com.android.support:cardview-v7:$supportLibraryVersion"
-    ]
-}

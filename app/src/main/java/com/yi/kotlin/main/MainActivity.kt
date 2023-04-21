@@ -18,8 +18,6 @@ import com.yi.common.util.LanguageUtils
 import com.yi.common.util.Logger
 import com.yi.common.util.setOnClicker
 import com.yi.kotlin.R
-import com.yi.kotlin.action.LoginAction
-import com.yi.kotlin.action.api.ApiCallback
 import com.yi.kotlin.alert.IOSSelectDialog
 import com.yi.kotlin.base.BaseActivity
 import com.yi.kotlin.base.Router
