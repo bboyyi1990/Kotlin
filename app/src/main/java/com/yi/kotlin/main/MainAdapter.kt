@@ -12,9 +12,9 @@ import kotlinx.android.synthetic.main.item_main_recycler.view.*
  * @date 2020/4/16
  */
 class MainAdapter :
-    AppBaseAdapter<LoginData, MainAdapter.ViewHolder<LoginData>>(R.layout.item_main_recycler) {
+    AppBaseAdapter<LoginData, MainAdapter.ViewHolder>(R.layout.item_main_recycler) {
 
-    inner class ViewHolder<T>(view: View) : AppBaseViewHolder<LoginData>(view) {
+    inner class ViewHolder(view: View) : AppBaseViewHolder<LoginData>(view) {
         override fun setData(data: LoginData) {
             itemView.tv_main_recycler_item.text = data.title
         }
