@@ -13,11 +13,13 @@ import com.yi.kotlin.R;
 
 import java.util.List;
 
+import kotlin.Deprecated;
+
 /**
  * 仿IOS 选择样式弹窗
  * Created by Yi on 2017/9/11.
  */
-
+@Deprecated(message = "replace with CommonDialog")
 public class IOSSelectDialog extends Dialog {
 
     private TextView mTitle;

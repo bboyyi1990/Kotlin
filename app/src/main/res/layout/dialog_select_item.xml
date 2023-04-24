@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <View
+        android:id="@+id/dialog_item_spilt_line"
         android:layout_width="fill_parent"
         android:layout_height="1px"
-        android:background="#b9b9b9"/>
+        android:background="#b9b9b9" />
 
     <TextView
         android:id="@+id/dialog_item_select_tv"
@@ -16,5 +17,5 @@
         android:gravity="center"
         android:text="照相机"
         android:textColor="#009EE7"
-        android:textSize="18sp"/>
+        android:textSize="18sp" />
 </LinearLayout>

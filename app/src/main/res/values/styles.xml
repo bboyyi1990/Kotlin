@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -24,4 +24,13 @@
         <item name="android:windowEnterAnimation">@anim/dialog_out</item>
         <item name="android:windowExitAnimation">@anim/dialog_hint</item>
     </style>
+
+    <style name="CustomDialog" parent="@android:style/Theme.DeviceDefault.Light.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowMinWidthMinor">86%</item>
+    </style>
+
 </resources>
