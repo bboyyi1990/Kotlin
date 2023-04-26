@@ -1,28 +1,27 @@
 package com.yi.kotlin.alert
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.text.SpannableString
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yi.kotlin.R
-import kotlinx.android.synthetic.main.dialog_select.*
-import kotlinx.android.synthetic.main.dialog_select_item.view.*
+import com.yi.kotlin.data.TextData
+import kotlinx.android.synthetic.main.dialog_select.dialog_select_option_layout
+import kotlinx.android.synthetic.main.dialog_select.dialog_title_tv
+import kotlinx.android.synthetic.main.dialog_select.tv_cancel
+import kotlinx.android.synthetic.main.dialog_select_item.view.dialog_item_select_tv
+import kotlinx.android.synthetic.main.dialog_select_item.view.dialog_item_spilt_line
 
-class CommonSelectDialog : BottomSheetDialogFragment() {
+class CommonSelectDialog : BaseSheetDialogFragment() {
     init {
         setStyle(DialogFragment.STYLE_NORMAL, R.style.alert_dialog)
     }
 
     private var title: String? = null
-    private var opts: MutableList<String>? = null
+    private val opts = mutableListOf<SpannableString>()
+    private var cancelStr: String? = null
     private var callback: ((Int) -> Unit)? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(R.layout.dialog_select, container, false)
+    override fun getLayout(): Int = R.layout.dialog_select
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,15 +51,26 @@ class CommonSelectDialog : BottomSheetDialogFragment() {
         return this
     }
 
-    fun addOptions(options: Array<String>, callback: (index: Int) -> Unit): CommonSelectDialog {
-        this.opts = options.toMutableList()
-        this.callback = callback
+    fun setCancelText(cancel: String): CommonSelectDialog {
+        this.cancelStr = cancel
         return this
     }
 
+    fun addOptions(options: Array<String>, callback: (index: Int) -> Unit): CommonSelectDialog {
+        return addOptions(options.toMutableList(), callback)
+    }
+
     fun addOptions(opts: MutableList<String>, callback: (index: Int) -> Unit): CommonSelectDialog {
-        this.opts = opts
-        this.callback = callback
+        val textDataArray = mutableListOf<TextData>()
+        opts.forEach { textDataArray.add(TextData(it)) }
+        addSpannableOptions(textDataArray, callback)
+        return this
+    }
+
+    fun addSpannableOptions(opts: MutableList<TextData>, invoke: (index: Int) -> Unit)
+            : CommonSelectDialog {
+        opts.forEach { this.opts.add(it.getSpannable()) }
+        this.callback = invoke
         return this
     }
 }
