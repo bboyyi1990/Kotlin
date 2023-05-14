@@ -51,10 +51,10 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name="com.yi.kotlin.main.NavigationActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="behind" />
+<!--        <activity-->
+<!--            android:name="com.yi.kotlin.main.NavigationActivity"-->
+<!--            android:launchMode="singleTask"-->
+<!--            android:screenOrientation="behind" />-->
 
     </application>
 

@@ -1,22 +1,31 @@
 package com.yi.kotlin.main
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Scaffold
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.view.WindowCompat
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.yi.common.util.ToastUtil
-import com.yi.kotlin.base.BaseActivity
+import com.yi.kotlin.R
 import com.yi.kotlin.base.BaseComposeActivity
 import com.yi.kotlin.base.Router
 
@@ -26,31 +35,12 @@ import com.yi.kotlin.base.Router
 @Route(path = "${Router.GROUP}MainComposeActivity")
 class MainComposeActivity : BaseComposeActivity() {
 
-    private val model by viewModels<MainViewModel>()
+//    private val model by viewModels<MainViewModel>()
 
     override fun onCreate() {
         initBar(true)
-//        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent { Greeting() }
     }
-}
-
-@Composable
-fun Greeting() {
-//    Scaffold {
-//        it
-//
-//    }
-    Text(
-        text = "Hello Everyone!",
-        modifier = Modifier
-            .background(Color.Red)
-            .fillMaxHeight()
-            .fillMaxWidth()
-            .clickable {
-                ToastUtil.showToast("MainCompose")
-            },
-    )
 }
 
 @Preview(showBackground = true)
@@ -58,3 +48,65 @@ fun Greeting() {
 fun DefaultPreview() {
     Greeting()
 }
+
+@Composable
+fun Greeting() {
+    MaterialTheme {
+        Row(
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth()
+                .fillMaxHeight(),
+//                .background(Color.Red)
+//            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource(R.drawable.dog_lover),
+                contentDescription = "Contact profile picture",
+                modifier = Modifier
+                    .size(40.dp)
+                    .clickable { }
+                    .clip(CircleShape)
+                    .border(1.dp, MaterialTheme.colors.onSecondary, CircleShape),
+                contentScale = ContentScale.Crop,
+            )
+            Spacer(modifier = Modifier.size(4.dp))
+            Column {
+                Text(text = "msg.author", style = commonTextStyle())
+                Spacer(modifier = Modifier.height(4.dp))
+                CustomizeText()
+            }
+        }
+    }
+}
+
+@Composable
+fun CustomizeText() {
+    val content =
+        "文字对任何界面都属于核心内容，而利用 Jetpack Compose 可以更轻松地显示或写入文字。Compose 可以充分利用其构建块的组合，这意味着您无需覆盖各种属性和方法，也无需扩展大型类，即可拥有特定的可组合项设计以及按您期望的方式运行的逻辑。"
+    Surface(shape = MaterialTheme.shapes.medium, elevation = 100.dp) {
+        Text(
+//            text = stringResource(R.string.APP_NAME),
+            text = content,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.ExtraBold,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            style = commonTextStyle(),
+            modifier = Modifier
+                .padding(4.dp)
+                .clickable {
+                    ToastUtil.showToast("")
+                },
+        )
+    }
+}
+
+@Composable
+fun commonTextStyle() = TextStyle(
+    fontSize = 14.sp,
+    fontFamily = FontFamily(Font(R.font.phetsarath_ot)),
+    color = colorResource(R.color.colorTitle),
+    fontWeight = FontWeight(400),
+)
+

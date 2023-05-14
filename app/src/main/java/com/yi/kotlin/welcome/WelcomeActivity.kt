@@ -38,8 +38,8 @@ class WelcomeActivity : BaseActivity() {
                 var params = hashMapOf<String, Any>()
                 params["value"] = "welcome to kotlin"
                 params["digit"] = 1000
-                Router.route(MainActivity::class.java, params)
-//                Router.route(MainComposeActivity::class.java, params)
+//                Router.route(MainActivity::class.java, params)
+                Router.route(MainComposeActivity::class.java, params)
                 finish()
             }
     }

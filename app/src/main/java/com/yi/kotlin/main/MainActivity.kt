@@ -1,8 +1,9 @@
 package com.yi.kotlin.main
 
 import android.content.Intent
-import android.os.Build
+import android.content.UriMatcher
 import android.view.View
+import android.webkit.MimeTypeMap
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
@@ -10,10 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.OnKeyboardListener
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
-import com.yi.common.database.User
 import com.yi.common.glide.GlideUtil
-import com.yi.common.http.BaseResponse
-import com.yi.common.util.ClickInterceptor
 import com.yi.common.util.LanguageUtils
 import com.yi.common.util.Logger
 import com.yi.common.util.setOnClicker
@@ -116,8 +114,7 @@ class MainActivity : BaseActivity() {
     }
 
     private var clickListener = View.OnClickListener { view ->
-
-
+        openDeviceFileManager()
 //        TestDialogFragment.getInstant().show(supportFragmentManager, "")
 //        LoginAction("1", "12", object : ApiCallback<LoginData>() {
 //            override fun onNext(t: BaseResponse<LoginData>) {
@@ -149,5 +146,21 @@ class MainActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
 //        RealmHelper.getRealDb().close()
+    }
+
+    private fun openDeviceFileManager() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "*/*"
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        startActivityForResult(intent, 101)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        data?.data?.let {
+            val type = contentResolver.getType(it)
+            val extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(type)
+            Logger.e(TAG, "file extension is $extension")
+        }
     }
 }

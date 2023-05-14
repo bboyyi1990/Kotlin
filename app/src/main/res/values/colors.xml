@@ -5,4 +5,5 @@
     <color name="colorAccent">#333333</color>
 
     <color name="common_transparent_color">#00000000</color>
+    <color name="colorTitle">#000000</color>
 </resources>
