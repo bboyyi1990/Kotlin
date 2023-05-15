@@ -3,14 +3,11 @@ package com.yi.kotlin.alert
 import android.os.Bundle
 import android.text.SpannableString
 import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.yi.kotlin.R
 import com.yi.kotlin.data.TextData
-import kotlinx.android.synthetic.main.dialog_select.dialog_select_option_layout
-import kotlinx.android.synthetic.main.dialog_select.dialog_title_tv
-import kotlinx.android.synthetic.main.dialog_select.tv_cancel
-import kotlinx.android.synthetic.main.dialog_select_item.view.dialog_item_select_tv
-import kotlinx.android.synthetic.main.dialog_select_item.view.dialog_item_spilt_line
+import com.yi.kotlin.databinding.DialogSelectBinding
 
 class CommonSelectDialog : BaseSheetDialogFragment() {
     init {
@@ -23,25 +20,27 @@ class CommonSelectDialog : BaseSheetDialogFragment() {
     private var callback: ((Int) -> Unit)? = null
     override fun getLayout(): Int = R.layout.dialog_select
 
+    override val binding by lazy { DialogSelectBinding.inflate(layoutInflater) }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tv_cancel.setOnClickListener { dismiss() }
+        binding.tvCancel.setOnClickListener { dismiss() }
         //setTitle
-        dialog_title_tv.text = title
-        dialog_title_tv.visibility = if (title.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.dialogTitleTv.text = title
+        binding.dialogTitleTv.visibility = if (title.isNullOrEmpty()) View.GONE else View.VISIBLE
         //setOptions
         opts?.also {
             for ((index, value) in it.withIndex()) {
                 val childView = layoutInflater.inflate(R.layout.dialog_select_item, null)
-                childView.dialog_item_select_tv.text = value
-                childView.dialog_item_spilt_line.visibility = if (index == 0) View.GONE
-                else View.VISIBLE
+                childView.findViewById<TextView>(R.id.dialog_item_select_tv).text = value
+                childView.findViewById<View>(R.id.dialog_item_spilt_line).visibility =
+                    if (index == 0) View.GONE else View.VISIBLE
                 childView.setOnClickListener { v ->
                     dismiss()
                     callback?.invoke(v.tag as Int)
                 }
                 childView.tag = index
-                dialog_select_option_layout.addView(childView)
+                binding.dialogSelectOptionLayout.addView(childView)
             }
         }
     }

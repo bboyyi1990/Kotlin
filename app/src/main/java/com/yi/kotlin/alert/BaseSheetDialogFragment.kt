@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yi.kotlin.R
@@ -20,10 +21,15 @@ abstract class BaseSheetDialogFragment : BottomSheetDialogFragment() {
         setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog)
     }
 
+    /**
+     * lazy view binding for convenient use
+     * you must override the property
+     */
+    open val binding: ViewBinding by lazy { TODO("must implement view binding") }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(getLayout(), container, false)
+    ): View? = binding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

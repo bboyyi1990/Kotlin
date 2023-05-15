@@ -22,8 +22,8 @@ abstract class BaseComposeActivity : CommonBaseActivity() {
      * fits - true 布局内容留出系统栏位置 / false 布局内容拉伸到系统栏底部，会被系统栏覆盖
      * listener = 软键盘操作回调，监听键盘状态以及高度
      */
-    open fun dinitBar(fits: Boolean = true) = this.initBar(fits, null)
-    protected fun initBar(fits: Boolean = true, keyboardListener: OnKeyboardListener? = null) =
+    open fun initBar(fits: Boolean = true) = this.initBar(fits, null)
+    open fun initBar(fits: Boolean = true, keyboardListener: OnKeyboardListener? = null) =
         immersionBar {
             statusBarDarkFont(true, 0.2f)
             fitsSystemWindows(fits)

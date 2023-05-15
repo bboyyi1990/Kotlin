@@ -1,3 +1,18 @@
-rootProject.name='Kotlin'
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+    }
+}
+rootProject.name = 'Kotlin'
 include ':app'
 include ':common'

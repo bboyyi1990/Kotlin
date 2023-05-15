@@ -1,20 +1,14 @@
 package com.yi.kotlin.welcome
 
-import android.annotation.SuppressLint
-import android.content.Intent
-import android.os.Bundle
-import android.view.Window
-import android.view.WindowManager
+import androidx.viewbinding.ViewBinding
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.yi.kotlin.R
 import com.yi.kotlin.base.BaseActivity
 import com.yi.kotlin.base.Router
-import com.yi.kotlin.main.MainActivity
+import com.yi.kotlin.databinding.ActivityWelcomeBinding
 import com.yi.kotlin.main.MainComposeActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_welcome.*
 import java.util.concurrent.TimeUnit
 
 /**
@@ -23,12 +17,11 @@ import java.util.concurrent.TimeUnit
  */
 @Route(path = "${Router.GROUP}WelcomeActivity")
 class WelcomeActivity : BaseActivity() {
-
     companion object {
         val TAG = WelcomeActivity::class.java.simpleName
     }
 
-    override fun getLayout(): Int = R.layout.activity_welcome
+    override val binding: ViewBinding by lazy { ActivityWelcomeBinding.inflate(layoutInflater) }
 
     override fun onCreate() {
         Observable.timer(1500, TimeUnit.MILLISECONDS)

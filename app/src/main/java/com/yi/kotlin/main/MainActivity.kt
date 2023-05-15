@@ -1,7 +1,7 @@
 package com.yi.kotlin.main
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.UriMatcher
 import android.view.View
 import android.webkit.MimeTypeMap
 import androidx.activity.viewModels
@@ -11,16 +11,14 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.OnKeyboardListener
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
-import com.yi.common.glide.GlideUtil
 import com.yi.common.util.LanguageUtils
 import com.yi.common.util.Logger
 import com.yi.common.util.setOnClicker
-import com.yi.kotlin.R
 import com.yi.kotlin.alert.IOSSelectDialog
 import com.yi.kotlin.base.BaseActivity
 import com.yi.kotlin.base.Router
 import com.yi.kotlin.data.LoginData
-import kotlinx.android.synthetic.main.activity_main.*
+import com.yi.kotlin.databinding.ActivityMainBinding
 
 /**
  * @author Yi
@@ -32,7 +30,7 @@ class MainActivity : BaseActivity() {
         private val TAG = MainActivity::class.java.simpleName
     }
 
-    override fun getLayout(): Int = R.layout.activity_main
+    override val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     @JvmField
     @Autowired(name = "value")
@@ -44,9 +42,7 @@ class MainActivity : BaseActivity() {
 
     private val adapter by lazy {
         MainAdapter().apply {
-            repeat(30) {
-                addData(LoginData("title = $it"))
-            }
+            repeat(30) { addData(LoginData("title = $it")) }
         }
     }
 
@@ -56,18 +52,16 @@ class MainActivity : BaseActivity() {
         "http://pre-newpay-chat.oss-ap-southeast-1.aliyuncs.com/d0401bd6518a441787b218e1016dc5d7.png?x-oss-process=image/resize,w_70,h_70"
 
     override fun onCreate() {
-//        val bindingUtil = DataBindingUtil.setContentView<ActivityMainBinding>(this, getLayout())
-//        bindingUtil.mainData = model.mainData
         initBar(true, keyboardListener)
-//        title_tv.setOnClickListener(clickListener)
-        title_tv.setOnClicker(clickListener)
-        refresh_layout.setOnRefreshLoadMoreListener(refreshListener)
-        recycler_main.layoutManager = LinearLayoutManager(this)
-        recycler_main.adapter = adapter
+        binding.titleTv.setOnClickListener(clickListener)
+        binding.titleTv.setOnClicker(clickListener)
+        binding.refreshLayout.setOnRefreshLoadMoreListener(refreshListener)
+        binding.recyclerMain.layoutManager = LinearLayoutManager(this)
+        binding.recyclerMain.adapter = adapter
         adapter.setOnItemChildClickListener { adapter, view, position -> }
         model.getData(0)
-        title_tv.text = getString(R.string.title)
-        language_btn.setOnClickListener {
+        binding.titleTv.text = getString(com.yi.common.R.string.title)
+        binding.languageBtn.setOnClickListener {
             IOSSelectDialog(this@MainActivity).addOptions(
                 arrayOf("中文", "LO", "English")
             ) { position ->
@@ -81,16 +75,10 @@ class MainActivity : BaseActivity() {
                 startActivity(intent)
             }.show()
         }
+        binding.titleTv.text = "FucK!!"
     }
 
-    override fun onResume() {
-        super.onResume()
-        GlideUtil.loadImage(path, 10, GlideUtil.TOP_ROUND, 0, 0, iv_main, false)
-        title_tv.text = getString(R.string.title)
-        val language = resources.configuration.locale.language
-        Logger.e(TAG, "language is $language")
-    }
-
+    @SuppressLint("MissingSuperCall")
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         if (intent?.action == null) {
@@ -139,13 +127,6 @@ class MainActivity : BaseActivity() {
 //                Logger.e(TAG, "data is $data")
 //            }
 //        })
-
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-//        RealmHelper.getRealDb().close()
     }
 
     private fun openDeviceFileManager() {

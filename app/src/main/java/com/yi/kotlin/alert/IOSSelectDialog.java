@@ -19,7 +19,7 @@ import kotlin.Deprecated;
  * 仿IOS 选择样式弹窗
  * Created by Yi on 2017/9/11.
  */
-@Deprecated(message = "replace with CommonDialog")
+@Deprecated(message = "replace with [CommonSelectDialog]")
 public class IOSSelectDialog extends Dialog {
 
     private TextView mTitle;
@@ -42,8 +42,8 @@ public class IOSSelectDialog extends Dialog {
         getWindow().setWindowAnimations(R.style.ios_alert);
 //        getWindow().setBackgroundDrawableResource(R.drawable.transparent_bg);
         View rootView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_select, null);
-        optionLayout = (LinearLayout) rootView.findViewById(R.id.dialog_select_option_layout);
-        mTitle = (TextView) rootView.findViewById(R.id.dialog_title_tv);
+        optionLayout = rootView.findViewById(R.id.dialog_select_option_layout);
+        mTitle = rootView.findViewById(R.id.dialog_title_tv);
         rootView.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

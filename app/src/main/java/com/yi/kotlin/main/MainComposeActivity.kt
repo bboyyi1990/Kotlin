@@ -1,10 +1,18 @@
 package com.yi.kotlin.main
 
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -13,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -24,8 +33,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.yi.common.util.ToastUtil
 import com.yi.kotlin.R
+import com.yi.kotlin.alert.CommonSelectDialog
 import com.yi.kotlin.base.BaseComposeActivity
 import com.yi.kotlin.base.Router
 
@@ -84,6 +93,7 @@ fun Greeting() {
 fun CustomizeText() {
     val content =
         "文字对任何界面都属于核心内容，而利用 Jetpack Compose 可以更轻松地显示或写入文字。Compose 可以充分利用其构建块的组合，这意味着您无需覆盖各种属性和方法，也无需扩展大型类，即可拥有特定的可组合项设计以及按您期望的方式运行的逻辑。"
+    val context = LocalContext.current as AppCompatActivity
     Surface(shape = MaterialTheme.shapes.medium, elevation = 100.dp) {
         Text(
 //            text = stringResource(R.string.APP_NAME),
@@ -96,7 +106,10 @@ fun CustomizeText() {
             modifier = Modifier
                 .padding(4.dp)
                 .clickable {
-                    ToastUtil.showToast("")
+                    CommonSelectDialog()
+                        .addOptions(arrayOf("a")) {
+                        }
+                        .show(context.supportFragmentManager)
                 },
         )
     }
