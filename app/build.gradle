@@ -44,16 +44,15 @@ android {
         }
     }
 
-    lintOptions {
-        disable 'MissingTranslation'
-        checkReleaseBuilds false
-        abortOnError false
-        checkReleaseBuilds false
-    }
 
     productFlavors {
         fairy {}
         fir {}
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+        disable 'MissingTranslation'
     }
 
     productFlavors.all { flavor -> }
