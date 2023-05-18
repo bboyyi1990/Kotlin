@@ -11,10 +11,14 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.OnKeyboardListener
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
+import com.yi.common.http.BaseData
+import com.yi.common.http.BaseResponse
 import com.yi.common.util.LanguageUtils
 import com.yi.common.util.Logger
 import com.yi.common.util.setOnClicker
-import com.yi.kotlin.alert.IOSSelectDialog
+import com.yi.kotlin.action.api.ApiCallback
+import com.yi.kotlin.action.user.CheckRegisteredAction
+import com.yi.kotlin.alert.CommonSelectDialog
 import com.yi.kotlin.base.BaseActivity
 import com.yi.kotlin.base.Router
 import com.yi.kotlin.data.LoginData
@@ -62,7 +66,7 @@ class MainActivity : BaseActivity() {
         model.getData(0)
         binding.titleTv.text = getString(com.yi.common.R.string.title)
         binding.languageBtn.setOnClickListener {
-            IOSSelectDialog(this@MainActivity).addOptions(
+            CommonSelectDialog().addOptions(
                 arrayOf("中文", "LO", "English")
             ) { position ->
                 when (position) {
@@ -73,7 +77,7 @@ class MainActivity : BaseActivity() {
                 finish()
                 val intent = Intent(this@MainActivity, MainActivity::class.java)
                 startActivity(intent)
-            }.show()
+            }.show(supportFragmentManager)
         }
         binding.titleTv.text = "FucK!!"
     }
@@ -121,12 +125,12 @@ class MainActivity : BaseActivity() {
 //        }
 
 
-//        CheckRegisteredAction().enqueue("11111111111", "+86", object : ApiCallback<BaseData>() {
-//            override fun onNext(t: BaseResponse<BaseData>) {
-//                var data = t.data
-//                Logger.e(TAG, "data is $data")
-//            }
-//        })
+        CheckRegisteredAction().enqueue("11111111111", "+86", object : ApiCallback<BaseData>() {
+            override fun onNext(t: BaseResponse<BaseData>) {
+                var data = t.data
+                Logger.e(TAG, "data is $data")
+            }
+        })
     }
 
     private fun openDeviceFileManager() {

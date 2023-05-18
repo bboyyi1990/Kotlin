@@ -16,4 +16,26 @@
         android:text="welcome activity"
         android:textSize="50dp" />
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/compose_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Compose"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/main_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Main"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
 </LinearLayout>

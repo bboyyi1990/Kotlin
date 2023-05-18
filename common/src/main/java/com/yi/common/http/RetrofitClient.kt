@@ -1,6 +1,6 @@
 package com.yi.common.http
 
-import com.yi.common.util.Logger
+import com.yi.common.util.Logger.loggerE
 import io.reactivex.schedulers.Schedulers
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -36,11 +36,12 @@ object RetrofitClient {
     private fun getHttpClient(interceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(interceptor)
-            .addInterceptor(
-                HttpLoggingInterceptor { message ->
-                    Logger.e(TAG, message)
-                }.setLevel(HttpLoggingInterceptor.Level.BODY)
-            )
+            .addInterceptor(HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+                override fun log(message: String) {
+                    //print request message
+                    message.loggerE(TAG)
+                }
+            }).setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
     }
 }

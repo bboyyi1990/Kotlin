@@ -1,14 +1,14 @@
 package com.yi.kotlin.action.api
 
-import com.yi.common.http.BaseResponse
 import com.yi.common.http.BaseCallback
 import com.yi.common.http.BaseData
+import com.yi.common.http.BaseResponse
 
 /**
  * @author Yi
  * @date 2020/5/11
  */
-open class ApiCallback<T:BaseData> : BaseCallback<T>() {
+open class ApiCallback<T : BaseData> : BaseCallback<T>() {
 
     /**
      *  TODO dispose common business
@@ -17,7 +17,7 @@ open class ApiCallback<T:BaseData> : BaseCallback<T>() {
      */
     override fun onNext(t: BaseResponse<T>) {
         super.onNext(t)
-        if (t.success){
+        if (t.success) {
 
         }
     }
@@ -25,6 +25,5 @@ open class ApiCallback<T:BaseData> : BaseCallback<T>() {
 
     override fun onError(e: Throwable) {
         super.onError(e)
-
     }
 }

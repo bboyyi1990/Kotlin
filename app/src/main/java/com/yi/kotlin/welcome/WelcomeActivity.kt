@@ -1,10 +1,11 @@
 package com.yi.kotlin.welcome
 
-import androidx.viewbinding.ViewBinding
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.yi.common.util.setOnClicker
 import com.yi.kotlin.base.BaseActivity
 import com.yi.kotlin.base.Router
 import com.yi.kotlin.databinding.ActivityWelcomeBinding
+import com.yi.kotlin.main.MainActivity
 import com.yi.kotlin.main.MainComposeActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -21,7 +22,7 @@ class WelcomeActivity : BaseActivity() {
         val TAG = WelcomeActivity::class.java.simpleName
     }
 
-    override val binding: ViewBinding by lazy { ActivityWelcomeBinding.inflate(layoutInflater) }
+    override val binding by lazy { ActivityWelcomeBinding.inflate(layoutInflater) }
 
     override fun onCreate() {
         Observable.timer(1500, TimeUnit.MILLISECONDS)
@@ -32,8 +33,10 @@ class WelcomeActivity : BaseActivity() {
                 params["value"] = "welcome to kotlin"
                 params["digit"] = 1000
 //                Router.route(MainActivity::class.java, params)
-                Router.route(MainComposeActivity::class.java, params)
-                finish()
+//                Router.route(MainComposeActivity::class.java, params)
+//                finish()
             }
+        binding.composeBtn.setOnClicker { Router.route(MainComposeActivity::class.java) }
+        binding.mainBtn.setOnClicker { Router.route(MainActivity::class.java) }
     }
 }

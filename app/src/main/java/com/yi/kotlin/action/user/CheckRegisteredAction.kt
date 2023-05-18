@@ -21,6 +21,6 @@ class CheckRegisteredAction : ApiAction<BaseData>() {
         headers: MutableMap<String, Any>,
         params: MutableMap<String, Any>
     ): Observable<BaseResponse<BaseData>> {
-        return getApi().userGet("check/username", headers, params)
+        return getApi().userGet("www.baidu.com", headers, params)
     }
 }

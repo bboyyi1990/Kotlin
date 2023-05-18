@@ -21,4 +21,8 @@ object Logger {
             Log.d(TAG, message)
         }
     }
+
+    fun String.loggerE(tag: String) {
+        e(tag, this)
+    }
 }
