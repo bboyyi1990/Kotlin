@@ -47,7 +47,7 @@
             android:screenOrientation="behind" />
 
         <activity
-            android:name=".main.MainComposeActivity"
+            android:name=".compose.MainComposeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 

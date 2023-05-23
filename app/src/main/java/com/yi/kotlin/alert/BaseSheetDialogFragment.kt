@@ -57,7 +57,5 @@ abstract class BaseSheetDialogFragment : BottomSheetDialogFragment() {
 
     open fun isCancelableOnTouchOutside() = true
 
-    fun show(fragmentManager: FragmentManager) {
-        show(fragmentManager, "BaseSheetDialogFragment")
-    }
+    fun show(fm: FragmentManager?) = fm?.let { show(it, "BaseSheetDialogFragment") }
 }

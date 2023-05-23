@@ -1,5 +1,7 @@
 package com.yi.kotlin.base
 
+import androidx.compose.runtime.remember
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 /**
@@ -9,4 +11,5 @@ import androidx.lifecycle.ViewModel
  * 如果需要context情况无发避免application
  */
 abstract class BaseViewModel : ViewModel() {
+    val loading by lazy { MutableLiveData<Boolean>() }
 }

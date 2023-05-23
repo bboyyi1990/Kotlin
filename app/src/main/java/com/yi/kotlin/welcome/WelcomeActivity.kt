@@ -6,7 +6,7 @@ import com.yi.kotlin.base.BaseActivity
 import com.yi.kotlin.base.Router
 import com.yi.kotlin.databinding.ActivityWelcomeBinding
 import com.yi.kotlin.main.MainActivity
-import com.yi.kotlin.main.MainComposeActivity
+import com.yi.kotlin.compose.MainComposeActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
