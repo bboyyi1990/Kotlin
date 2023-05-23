@@ -22,11 +22,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -56,78 +57,78 @@ class MainComposeActivity : BaseComposeActivity() {
     fun DefaultPreview() {
         Greeting()
     }
+}
 
-    @Composable
-    fun Greeting() {
-        val viewModel = viewModel<MainComposeViewModel>()
-        MaterialTheme {
-            val list = mutableListOf<Any>()
-            repeat(15) { list.add(it) }
-            LazyColumn { items(list) { MessageCard() } }
-        }
+@Composable
+fun Greeting() {
+    MaterialTheme {
+        val list = mutableListOf<Any>()
+        repeat(15) { list.add(it) }
+        LazyColumn { items(list) { MessageCard() } }
     }
+}
 
-    @Composable
-    fun MessageCard() {
-        val viewModel = viewModel<MainComposeViewModel>()
-        Row(
+@Composable
+fun MessageCard() {
+    val viewModel = viewModel<MainComposeViewModel>()
+    Row(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+            .fillMaxHeight(),
+    ) {
+        Image(
+            painter = painterResource(R.drawable.dog_lover),
+            contentDescription = "Contact profile picture",
             modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth()
-                .fillMaxHeight(),
-        ) {
-            Image(
-                painter = painterResource(R.drawable.dog_lover),
-                contentDescription = "Contact profile picture",
-                modifier = Modifier
-                    .size(40.dp)
-                    .clickable { viewModel.test() }
-                    .clip(CircleShape)
-                    .border(1.dp, MaterialTheme.colors.onSecondary, CircleShape),
-                contentScale = ContentScale.Crop,
+                .size(40.dp)
+                .clickable { viewModel.test() }
+                .clip(CircleShape)
+                .border(1.dp, MaterialTheme.colors.onSecondary, CircleShape),
+            contentScale = ContentScale.Crop,
+        )
+        Spacer(modifier = Modifier.size(4.dp))
+        var isExpanded by rememberSaveable { mutableStateOf(false) }
+        Column(modifier = Modifier.clickable { isExpanded = !isExpanded }) {
+            Text(
+                text = viewModel._result.value,
+                style = CommonTextStyle()
             )
-            Spacer(modifier = Modifier.size(4.dp))
-            var isExpanded by remember { mutableStateOf(false) }
-            Column(modifier = Modifier.clickable { isExpanded = !isExpanded }) {
-                Text(
-                    text = viewModel._result.value,
-                    style = CommonTextStyle()
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                CustomizeText(isExpanded)
-            }
+            Spacer(modifier = Modifier.height(4.dp))
+            CustomizeText(isExpanded)
         }
     }
+}
 
-    @Composable
-    fun CustomizeText(isExpanded: Boolean) {
-        val content =
-            "文字对任何界面都属于核心内容，而利用 Jetpack Compose 可以更轻松地显示或写入文字。Compose 可以充分利用其构建块的组合，这意味着您无需覆盖各种属性和方法，也无需扩展大型类，即可拥有特定的可组合项设计以及按您期望的方式运行的逻辑。"
-//    val context = LocalContext.current as? MainComposeActivity
-        Surface(
-            shape = MaterialTheme.shapes.medium, elevation = 100.dp,
+@Composable
+fun CustomizeText(isExpanded: Boolean) {
+    val viewModel = viewModel<MainComposeViewModel>()
+    val content =
+        "文字对任何界面都属于核心内容，而利用 Jetpack Compose 可以更轻松地显示或写入文字。Compose 可以充分利用其构建块的组合，这意味着您无需覆盖各种属性和方法，也无需扩展大型类，即可拥有特定的可组合项设计以及按您期望的方式运行的逻辑。"
+    val context = LocalContext.current as? MainComposeActivity
+    Surface(
+        shape = MaterialTheme.shapes.medium, elevation = 100.dp,
+        modifier = Modifier
+            .animateContentSize()
+            .padding(1.dp)
+    ) {
+        Text(
+            text = content,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.ExtraBold,
+            maxLines = if (isExpanded) Int.MAX_VALUE else 1,
+            overflow = TextOverflow.Ellipsis,
+            style = CommonTextStyle(),
             modifier = Modifier
                 .animateContentSize()
-                .padding(1.dp)
-        ) {
-            Text(
-                text = content,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.ExtraBold,
-                maxLines = if (isExpanded) Int.MAX_VALUE else 1,
-                overflow = TextOverflow.Ellipsis,
-                style = CommonTextStyle(),
-                modifier = Modifier
-                    .animateContentSize()
-                    .padding(4.dp)
-                    .clickable {
-                        CommonSelectDialog()
-                            .addOptions(arrayOf("a")) {
-                            }
-                            .show(supportFragmentManager)
-                    },
-            )
-        }
+                .padding(4.dp)
+                .clickable {
+                    CommonSelectDialog()
+                        .addOptions(arrayOf(viewModel._result.value)) {
+                        }
+                        .show(context?.supportFragmentManager)
+                },
+        )
     }
 }
 

@@ -2,6 +2,7 @@ package com.yi.kotlin.compose
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
+import com.yi.common.util.ToastUtil
 import com.yi.kotlin.base.BaseViewModel
 import java.util.UUID
 
@@ -15,4 +16,9 @@ class MainComposeViewModel : BaseViewModel() {
     }
 
     fun getText() = _result.value
+
+    override fun onCleared() {
+        super.onCleared()
+        ToastUtil.showToast(" compose cleared")
+    }
 }
