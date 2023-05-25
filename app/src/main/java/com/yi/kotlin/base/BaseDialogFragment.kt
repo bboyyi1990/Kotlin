@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatDialogFragment
 import com.gyf.immersionbar.ktx.immersionBar
+import com.yi.kotlin.R
 
 
 /**
@@ -22,9 +23,9 @@ abstract class BaseDialogFragment : AppCompatDialogFragment() {
      */
     private fun initWindow() {
         immersionBar {
-//            statusBarDarkFont(true, 1f)
-//            statusBarColor(R.color.colorAccent)
-            fitsSystemWindows(false)
+            statusBarDarkFont(true, 0.5f)
+            statusBarColor(R.color.colorPrimary)
+            fitsSystemWindows(true)
         }
         val window = dialog?.window
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));

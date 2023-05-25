@@ -68,6 +68,7 @@ class MainComposeActivity : BaseComposeActivity() {
     @Composable
     @Preview(showBackground = true, name = "Touch Fish!")
     fun LoafOnTheJob() {
+        val context = LocalContext.current as? MainComposeActivity
         Row(
             modifier = Modifier
                 .fillMaxSize()
@@ -93,6 +94,7 @@ class MainComposeActivity : BaseComposeActivity() {
                         Snackbar
                             .make(window.decorView, "this is Snackbar", Snackbar.LENGTH_SHORT)
                             .show()
+                        ComposeDialog().show(context!!.supportFragmentManager,"")
                     },
             )
         }
