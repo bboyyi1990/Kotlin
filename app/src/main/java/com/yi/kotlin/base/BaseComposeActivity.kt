@@ -12,6 +12,7 @@ abstract class BaseComposeActivity : CommonBaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initBar()
         onCreate()
     }
 

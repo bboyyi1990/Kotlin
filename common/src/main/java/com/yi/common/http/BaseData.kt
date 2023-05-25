@@ -6,5 +6,4 @@ package com.yi.common.http
  * 数据模型，定义业务模型都应该继承此类
  * 实现 BaseObservable 调用notify 方法通知数据变更
  */
-open class BaseData {
-}
+open class BaseData

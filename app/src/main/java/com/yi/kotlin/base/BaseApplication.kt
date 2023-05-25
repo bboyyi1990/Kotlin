@@ -18,10 +18,10 @@ class BaseApplication : CommonBaseApplication() {
     companion object {
         val TAG = BaseApplication::class.java.simpleName
 
-        private lateinit var application: CommonBaseApplication
+//        private lateinit var application: CommonBaseApplication
 
         fun getInstance(): CommonBaseApplication {
-            return application
+            return CommonBaseApplication.getInstance()
         }
     }
 

@@ -22,7 +22,6 @@ object Logger {
         }
     }
 
-    fun String.loggerE(tag: String) {
-        e(tag, this)
-    }
+    fun String.loggerE(tag: Any) = e(tag::class.java.simpleName, this)
+
 }

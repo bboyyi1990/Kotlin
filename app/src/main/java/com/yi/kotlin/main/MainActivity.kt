@@ -5,9 +5,11 @@ import android.content.Intent
 import android.view.View
 import android.webkit.MimeTypeMap
 import androidx.activity.viewModels
+import androidx.compose.material.Snackbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.google.android.material.snackbar.Snackbar
 import com.gyf.immersionbar.OnKeyboardListener
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
@@ -106,7 +108,7 @@ class MainActivity : BaseActivity() {
     }
 
     private var clickListener = View.OnClickListener { view ->
-        openDeviceFileManager()
+//        openDeviceFileManager()
 //        TestDialogFragment.getInstant().show(supportFragmentManager, "")
 //        LoginAction("1", "12", object : ApiCallback<LoginData>() {
 //            override fun onNext(t: BaseResponse<LoginData>) {
@@ -124,6 +126,7 @@ class MainActivity : BaseActivity() {
 //            }
 //        }
 
+        Snackbar.make(view,"this is snackBar",Snackbar.LENGTH_SHORT).show()
 
         CheckRegisteredAction().enqueue("11111111111", "+86", object : ApiCallback<BaseData>() {
             override fun onNext(t: BaseResponse<BaseData>) {

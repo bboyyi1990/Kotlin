@@ -1,18 +1,22 @@
 package com.yi.kotlin.compose
 
+import android.widget.TextView
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -26,6 +30,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -34,8 +40,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.google.android.material.snackbar.Snackbar
 import com.yi.kotlin.R
 import com.yi.kotlin.alert.CommonSelectDialog
 import com.yi.kotlin.base.BaseComposeActivity
@@ -47,15 +55,47 @@ import com.yi.kotlin.base.Router
  */
 @Route(path = "${Router.GROUP}MainComposeActivity")
 class MainComposeActivity : BaseComposeActivity() {
+
     override fun onCreate() {
-        initBar(true)
-        setContent { Greeting() }
+//        setContent { Greeting() }
+        setContent { LoafOnTheJob() }
     }
 
-    @Preview(showBackground = true)
+    @Preview(showBackground = true, name = "@@@@")
     @Composable
-    fun DefaultPreview() {
-        Greeting()
+    fun DefaultPreview() = Greeting()
+
+    @Composable
+    @Preview(showBackground = true, name = "Touch Fish!")
+    fun LoafOnTheJob() {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Red)
+        ) {
+            AndroidView(
+                factory = {
+                    TextView(it).apply {
+                        text = "initialize"
+                        textSize = 30f
+                        setTextColor(Color.Green.toArgb())
+//                        setOnClickListener {}
+                    }
+                },
+                update = {
+                    it.text = System.currentTimeMillis().toString()
+                },
+                modifier = Modifier
+//                    .fillMaxSize()
+                    .background(Color.Blue)
+//                    .sizeIn(maxWidth = 10.dp, maxHeight = 10.dp)
+                    .clickable {
+                        Snackbar
+                            .make(window.decorView, "this is Snackbar", Snackbar.LENGTH_SHORT)
+                            .show()
+                    },
+            )
+        }
     }
 }
 
@@ -131,4 +171,3 @@ fun CustomizeText(isExpanded: Boolean) {
         )
     }
 }
-
