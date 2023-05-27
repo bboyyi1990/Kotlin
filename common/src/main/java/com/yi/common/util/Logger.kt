@@ -22,6 +22,7 @@ object Logger {
         }
     }
 
-    fun String.loggerE(tag: Any) = e(tag::class.java.simpleName, this)
-
+    fun String.loggerE(tag: Any) = e(
+        if (tag is String) tag else tag::class.java.simpleName, this
+    )
 }
