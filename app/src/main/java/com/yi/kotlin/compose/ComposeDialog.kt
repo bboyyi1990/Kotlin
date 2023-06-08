@@ -96,6 +96,9 @@ class ComposeDialog : BaseDialogFragment() {
         MaterialTheme {
             val scaffoldState = rememberScaffoldState()
             val scope = rememberCoroutineScope()
+            scope.launch {
+
+            }
             Scaffold(
                 modifier = Modifier
                     .background(Color.Black)

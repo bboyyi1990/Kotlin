@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -26,6 +25,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -43,7 +43,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.google.android.material.snackbar.Snackbar
 import com.yi.kotlin.R
 import com.yi.kotlin.alert.CommonSelectDialog
 import com.yi.kotlin.base.BaseComposeActivity
@@ -69,6 +68,8 @@ class MainComposeActivity : BaseComposeActivity() {
     @Preview(showBackground = true, name = "Touch Fish!")
     fun LoafOnTheJob() {
         val context = LocalContext.current as? MainComposeActivity
+        var textStr by remember { mutableStateOf("ffff") }
+        var view: TextView? = null
         Row(
             modifier = Modifier
                 .fillMaxSize()
@@ -76,25 +77,30 @@ class MainComposeActivity : BaseComposeActivity() {
         ) {
             AndroidView(
                 factory = {
-                    TextView(it).apply {
+                    view = TextView(it).apply {
                         text = "initialize"
                         textSize = 30f
                         setTextColor(Color.Green.toArgb())
 //                        setOnClickListener {}
                     }
+                    view!!
                 },
                 update = {
-                    it.text = System.currentTimeMillis().toString()
+//                    it.text = System.currentTimeMillis().toString()
+                    it.text = textStr
                 },
                 modifier = Modifier
 //                    .fillMaxSize()
                     .background(Color.Blue)
 //                    .sizeIn(maxWidth = 10.dp, maxHeight = 10.dp)
                     .clickable {
-                        Snackbar
-                            .make(window.decorView, "this is Snackbar", Snackbar.LENGTH_SHORT)
-                            .show()
-                        ComposeDialog().show(context!!.supportFragmentManager,"")
+//                        Snackbar
+//                            .make(view!!, "this is Snackbar", Snackbar.LENGTH_SHORT)
+//                            .show()
+                        textStr = System
+                            .currentTimeMillis()
+                            .toString()
+//                        ComposeDialog().show(context!!.supportFragmentManager, "")
                     },
             )
         }
@@ -173,3 +179,4 @@ fun CustomizeText(isExpanded: Boolean) {
         )
     }
 }
+
