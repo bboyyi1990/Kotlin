@@ -2,9 +2,9 @@ package com.yi.kotlin.base
 
 import android.graphics.Color
 import com.alibaba.android.arouter.launcher.ARouter
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
-import com.scwang.smartrefresh.layout.footer.ClassicsFooter
-import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.yi.common.BuildConfig
 import com.yi.common.base.CommonBaseApplication
 import com.yi.kotlin.R

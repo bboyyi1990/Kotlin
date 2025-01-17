@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.DraggableState
 import androidx.compose.foundation.gestures.Orientation
@@ -31,7 +32,6 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.FloatingActionButtonDefaults
-import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -40,8 +40,6 @@ import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarResult
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -66,6 +64,7 @@ import com.gyf.immersionbar.ktx.fitsTitleBarMarginTop
 import com.yi.common.util.Logger.loggerE
 import com.yi.kotlin.base.BaseDialogFragment
 import com.yi.kotlin.base.CommonTextStyle
+import com.yi.kotlin.compose.theme.themeColor
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -96,9 +95,6 @@ class ComposeDialog : BaseDialogFragment() {
         MaterialTheme {
             val scaffoldState = rememberScaffoldState()
             val scope = rememberCoroutineScope()
-            scope.launch {
-
-            }
             Scaffold(
                 modifier = Modifier
                     .background(Color.Black)
@@ -164,11 +160,20 @@ fun GetTopBar(naviClick: () -> Unit) = Column(modifier = Modifier.background(Col
             Text(
                 "this is title",
                 style = CommonTextStyle(),
-                color = Color.DarkGray.copy(0.5f)
+                color = Color.Black.copy(0.8f),
+                modifier = Modifier
+                    .border(1.dp, themeColor, RoundedCornerShape(5.dp))
+                    .background(Color.Yellow, RoundedCornerShape(5.dp))
+                    .padding(5.dp)
+                    .clickable {
+                    }
+
             )
         },
         navigationIcon = {
-            IconButton(onClick = naviClick) { Icon(Icons.Default.ArrowBack, null) }
+            IconButton(onClick = naviClick) {
+//                Icon(Icons.Default.ArrowBack, null)
+            }
         },
         backgroundColor = Color.White,
 //        elevation = 0.dp,

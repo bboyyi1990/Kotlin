@@ -1,12 +1,13 @@
 package com.yi.kotlin.compose
 
+import android.annotation.SuppressLint
 import android.widget.TextView
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -30,6 +31,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
@@ -64,16 +66,15 @@ class MainComposeActivity : BaseComposeActivity() {
     @Composable
     fun DefaultPreview() = Greeting()
 
+    @SuppressLint("ContextCastToActivity")
     @Composable
     @Preview(showBackground = true, name = "Touch Fish!")
     fun LoafOnTheJob() {
         val context = LocalContext.current as? MainComposeActivity
         var textStr by remember { mutableStateOf("ffff") }
         var view: TextView? = null
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Red)
+        Column(
+            modifier = Modifier.fillMaxSize()
         ) {
             AndroidView(
                 factory = {
@@ -91,7 +92,7 @@ class MainComposeActivity : BaseComposeActivity() {
                 },
                 modifier = Modifier
 //                    .fillMaxSize()
-                    .background(Color.Blue)
+//                    .background(Color.Blue)
 //                    .sizeIn(maxWidth = 10.dp, maxHeight = 10.dp)
                     .clickable {
 //                        Snackbar
@@ -100,9 +101,21 @@ class MainComposeActivity : BaseComposeActivity() {
                         textStr = System
                             .currentTimeMillis()
                             .toString()
-//                        ComposeDialog().show(context!!.supportFragmentManager, "")
+                        ComposeDialog().show(context!!.supportFragmentManager, "")
                     },
             )
+
+            Box(
+                Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
+                    .padding(20.dp)
+                    .shadow(5.dp)
+            ) {
+
+            }
+
+
         }
     }
 }
@@ -148,6 +161,7 @@ fun MessageCard() {
     }
 }
 
+@SuppressLint("ContextCastToActivity")
 @Composable
 fun CustomizeText(isExpanded: Boolean) {
     val viewModel = viewModel<MainComposeViewModel>()
